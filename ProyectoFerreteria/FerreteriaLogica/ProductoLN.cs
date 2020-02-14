@@ -26,7 +26,7 @@ namespace FerreteriaLogica
                 registro.descripcion = fila["descripcion"].ToString();
                 registro.precio = Convert.ToDecimal(fila["precio"]);
                 registro.categoria.idCategoria = Convert.ToInt32(fila["categoria"]);
-
+                registro.imagen = (byte[])fila["imagen"];
                 lista.Add(registro);
             }
             return lista;

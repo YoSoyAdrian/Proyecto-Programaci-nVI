@@ -15,14 +15,22 @@ namespace FerreteriaWeb
         {
 
         }
+       
 
-     
-        public List<Producto> listaProductos_GetData()
+        protected void btnSeleccionar_Command(object sender, CommandEventArgs e)
         {
-              
-            return ProductoLN.ObtenerTodos();
+
         }
 
-      
+        // El tipo devuelto puede ser modificado a IEnumerable, sin embargo, para ser compatible con la paginación y ordenación de 
+        //, se deben agregar los siguientes parametros:
+        //     int maximumRows
+        //     int startRowIndex
+        //     out int totalRowCount
+        //     string sortByExpression
+        public List<Producto> listaProductos_GetData()
+        {
+            return ProductoLN.ObtenerTodos();
+        }
     }
 }

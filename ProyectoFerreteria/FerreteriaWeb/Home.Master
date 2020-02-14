@@ -9,12 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ferretería Digital</title>
 
-    <asp:PlaceHolder runat="server">
-
-        <%--  <%: Scripts.Render("~/bundles/modernizr") %>--%>
-
-    </asp:PlaceHolder>
-
+    <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/jquery-3.4.1.js"></script>
     <script src="Scripts/main.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>

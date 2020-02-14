@@ -70,7 +70,7 @@
                             SetFocusOnError="true"
                             ValidationGroup="Registrar"
                             Display="Dynamic"></asp:RequiredFieldValidator>
-<%--                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+<%--     <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
                             runat="server"
                             ErrorMessage="El precio solo debe contener números"
                             ControlToValidate="txtPrecio"
