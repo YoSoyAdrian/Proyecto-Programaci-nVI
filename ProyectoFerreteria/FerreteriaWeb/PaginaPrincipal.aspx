@@ -2,22 +2,23 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="Content/estilo.css" rel="stylesheet" />
+
     <div class="row form-group">
-        <div class="col-2">
+        <div class="col-xl-2 col-sm-12">
         <div class="form-group  text-center">
             <label>Categor&#237;a</label>
         </div>
-        <div class="form-group border">
+        <div class="form-group custom-control custom-checkbox mb-3 col-sm-12">
 
-            <asp:CheckBoxList ID="ChkCategoria" runat="server" AutoPostBack="True" CssClass="form-group ">
-                <asp:ListItem>Jardiner&#237;a</asp:ListItem>
+            <asp:CheckBoxList ID="ChkCategoria" runat="server" AutoPostBack="True"  CssClass="ra">
+                <asp:ListItem >Jardiner&#237;a</asp:ListItem>
                 <asp:ListItem>Pinturas</asp:ListItem>
                 <asp:ListItem>Plomer&#237;a</asp:ListItem>
             </asp:CheckBoxList>
         </div>
     </div>
       
-        <div class="col-10 form-group">
+        <div class="col-xl-10 col-sm-12 form-group">
             <asp:ListView ID="listaProductos" runat="server"
                 GroupItemCount="4"
                 ItemType="FerreteriaEntidad.Producto"
@@ -36,16 +37,16 @@
                 </EmptyItemTemplate>
                 <%-- Grupo o fila --%>
                 <GroupTemplate>
-                    <div class="row ">
+                    <div class="row col-sm-12 ">
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                     </div>
                 </GroupTemplate>
                 <%--Datos del item --%>
                 <ItemTemplate>
-                    <div class="row col-3">
+                    <div class="row col-xl-3 col-sm-12">
                        
 
-                            <article class="card card--2 form-group col-12">
+                            <article class="card card--2 form-group col-xl-12 col-sm-12">
                                 <div class="card__info-hover form-group">
                                     <div class="card__clock-info ">
                                         <span class="card__time"><%# Eval("precio","${0:N0}") %></span>
@@ -58,7 +59,7 @@
                                     </div>
                                 </a>
                                 <div class="card__info form-group">
-                                    <span class="card__category form-group"><%#:Item.nombre %> </span>
+                                    <span class="card__category form-group justify-content-center"><%#:Item.nombre %> </span>
                                     <h3 class="card__by form-group"><%#:Item.categoria%></h3>
                                     <div class="form-group text-center">
                                         <asp:Button CssClass="btn btn-primary "

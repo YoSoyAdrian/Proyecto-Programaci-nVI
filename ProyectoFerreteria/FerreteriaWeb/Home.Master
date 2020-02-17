@@ -14,21 +14,24 @@
     <script src="Scripts/main.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-        <link href="Content/estilo.css" rel="stylesheet" />
+    <link href="Content/estilo.css" rel="stylesheet" />
     <style>
-        .row{
-            margin-right:0;
-            margin-left:0;
+        .row {
+            margin-right: 0;
+            margin-left: 0;
         }
     </style>
 </head>
-    
+
 <body>
-    <form id="form1" runat="server" >
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+
+        </asp:ScriptManager>
         <%-- Menú de Navegación --%>
-        <div class="row bg-dark container-fluid">
+        <div class="row bg-dark container-fluid text-white">
             <div class="col-3">
-                   <asp:Image ID="ImgLogo" ImageUrl="~/Img/logo.png" runat="server" />
+                <asp:Image ID="ImgLogo" ImageUrl="~/Img/logo.png" runat="server" />
                 <asp:Label CssClass="text-light  font-weight-bold" ID="LblLogo" runat="server" Text="Ferretería Digital">
                  
                 </asp:Label>
@@ -40,85 +43,108 @@
                 </div>
             </div>
             <div class="col-5 align-self-center ">
-                <nav class="navbar navbar-expand-sm">
+                <nav class="navbar navbar-expand-sm" >
 
-                    <ul class="nav nav-pills justify-content-center">
+                    <ul class="nav nav-pills justify-content-center ">
                         <li class="nav-item active ">
-                            <a class="nav-link" href="#">
-                                <img src="Img/userGold.png" />Rango</a>
+                            <asp:ImageButton ID="ImageButton1" CssClass="nav-link text-white"  runat="server" />
+                            
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#">
                                 <img src="Img/usuario.png" />Mi Cuenta</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" id="myBtn" href="#">Iniciar Sesión</a>
-                                <a class="dropdown-item" href="#">Crear Cuenta</a>
+                            <div class="dropdown-menu ">
+                                <a class="dropdown-item " id="myBtn" href="#">Iniciar Sesión</a>
+                                <a class="dropdown-item" href="#">
+                                    <asp:Button ID="btnShowModal" runat="server" Text="Crear Cuenta" CssClass="btn btn-primary btn-light" data-target="#pnlModal"
+                                        data-toggle="modal" OnClientClick="javascript:return false;" /></a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <img src="Img/supermarket.png" />Carrito<span class="rounded-left badge-light bg-white" >0</span> </a>
-                           
+                            <a class="nav-link text-white" href="#">
+                                <img src="Img/supermarket.png" />Carrito<span class="rounded-left badge-light bg-white">0</span> </a>
+
                         </li>
                     </ul>
                 </nav>
             </div>
         </div>
+
+        <asp:Panel ID="pnlModal" runat="server" role="dialog" CssClass="modal fade">
+            <asp:Panel ID="pnlInner" runat="server" CssClass="modal-dialog">
+                <asp:Panel ID="pnlContent" CssClass="modal-content" runat="server">
+                    <asp:Panel runat="server" class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title"></h4>
+                    </asp:Panel>
+                    <asp:Panel runat="server" class="modal-body">
+                        <p>
+                            
+                        </p>
+                    </asp:Panel>
+                    <asp:Panel runat="server" class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </asp:Panel>
+                </asp:Panel>
+            </asp:Panel>
+        </asp:Panel>
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 <asp:Label runat="server" ID="NombreCompañia" Text="@Company"> </asp:Label>
             </asp:ContentPlaceHolder>
         </div>
     </form>
-    <form id="form2" name="form2" method="get" >
-    <div class="container mt-3">
-        <!-- The Modal -->
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
+    <form id="form2" name="form2" method="get">
+        <div class="container mt-3">
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header bg-info">
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-info">
 
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label >Correo:</label>
+                            <button type="button" class="close" data-dismiss="modal">×</button>
                         </div>
-                        <div class="input-group form-group">
-                            <input type="text" class="form-control" placeholder="Escriba su correo electronico" id="email" name="email" required>
-                            <div class="input-group-append">
-                                <span class="input-group-text">@example.com</span>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Correo:</label>
+                            </div>
+                            <div class="input-group form-group">
+                                <input type="text" class="form-control" placeholder="Escriba su correo electronico" id="email" name="email" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">@example.com</span>
+                                </div>
+                            </div>
+                            <div class="formulario">
+                                <label>Contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                         </div>
-                        <div class="formulario">
-                            <label >Contraseña:</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                    </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer ">
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-success" onclick="check()" id="btnEntrar" name="btnEntrar" >Entrar</button>
-                        </div>
-                        <div class="col-auto">
-                            <button type="button" class="btn btn-danger"  data-dismiss="modal">Close</button>
-                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer ">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-success" onclick="check()" id="btnEntrar" name="btnEntrar">Entrar</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
 
+
+                        </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
 
-    </div>
-        </form>
-  
+        </div>
+    </form>
+
 </body>
-   
+
 </html>
