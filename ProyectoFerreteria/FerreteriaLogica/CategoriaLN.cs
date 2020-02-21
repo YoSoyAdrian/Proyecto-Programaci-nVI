@@ -25,5 +25,11 @@ namespace FerreteriaLogica
             }
             return lista;
         }
+        public static Categoria Obtener(int idCategoria)
+        {
+            List<Categoria> lista = CategoriaLN.ObtenerTodos();
+            Categoria categoria = lista.Where(x => x.idCategoria == idCategoria).FirstOrDefault();
+            return categoria;
+        }
     }
 }

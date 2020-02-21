@@ -43,8 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriaLN.cs" />
+    <Compile Include="ClienteLN.cs" />
+    <Compile Include="CuponLN.cs" />
     <Compile Include="ProductoLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangoLN.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FerreteriaDatos\FerreteriaDatos.csproj">

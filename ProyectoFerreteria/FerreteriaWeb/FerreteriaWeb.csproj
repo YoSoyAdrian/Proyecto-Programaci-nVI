@@ -106,16 +106,22 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilo.css" />
+    <Content Include="Img\cupon.png" />
     <Content Include="Img\eyenClose.png" />
     <Content Include="Img\eyeOpen.png" />
+    <Content Include="Img\Fondo.jpg" />
     <Content Include="Img\logo.png" />
     <Content Include="Img\supermarket.png" />
     <Content Include="Img\UserBronce.png" />
     <Content Include="Img\userGold.png" />
     <Content Include="Img\userSilver.png" />
     <Content Include="Img\usuario.png" />
+    <Content Include="InicioSesion.aspx" />
+    <Content Include="ListaCarrito.aspx" />
+    <Content Include="MantCliente.aspx" />
     <Content Include="MantProducto.aspx" />
     <Content Include="PaginaPrincipal.aspx" />
+    <Content Include="RegistrarCupon.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -240,6 +246,27 @@
     <Compile Include="Home.Master.designer.cs">
       <DependentUpon>Home.Master</DependentUpon>
     </Compile>
+    <Compile Include="InicioSesion.aspx.cs">
+      <DependentUpon>InicioSesion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioSesion.aspx.designer.cs">
+      <DependentUpon>InicioSesion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaCarrito.aspx.cs">
+      <DependentUpon>ListaCarrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaCarrito.aspx.designer.cs">
+      <DependentUpon>ListaCarrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MantCliente.aspx.cs">
+      <DependentUpon>MantCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MantCliente.aspx.designer.cs">
+      <DependentUpon>MantCliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MantProducto.aspx.cs">
       <DependentUpon>MantProducto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,6 +282,13 @@
       <DependentUpon>PaginaPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrarCupon.aspx.cs">
+      <DependentUpon>RegistrarCupon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrarCupon.aspx.designer.cs">
+      <DependentUpon>RegistrarCupon.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

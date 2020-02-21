@@ -26,10 +26,17 @@ namespace FerreteriaLogica
                 registro.descripcion = fila["descripcion"].ToString();
                 registro.precio = Convert.ToDecimal(fila["precio"]);
                 registro.categoria.idCategoria = Convert.ToInt32(fila["categoria"]);
+                registro.categoria.nombre = CategoriaLN.Obtener(registro.categoria.idCategoria).nombre;
                 registro.imagen = (byte[])fila["imagen"];
                 lista.Add(registro);
             }
             return lista;
+        }
+        public static Producto Obtener(int idProducto)
+        {
+            List<Producto> lista = ProductoLN.ObtenerTodos();
+            Producto producto = lista.Where(x => x.idProducto == idProducto).FirstOrDefault();
+            return producto;
         }
         public static void Nuevo(Producto producto)
         {

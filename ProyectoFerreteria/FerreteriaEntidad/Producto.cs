@@ -20,6 +20,11 @@ namespace FerreteriaEntidad
         {
             categoria = new Categoria();
         }
+
+        public override string ToString()
+        {
+            return nombre;
+        }
     }
     
 }

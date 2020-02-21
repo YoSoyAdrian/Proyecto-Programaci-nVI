@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
-        <div class="col col-lg-6">
+        <div class="col-xl-6">
             <fieldset>
                 <legend>Mantenimiento de Productos</legend>
                 <div class="form-group row">
@@ -43,7 +43,6 @@
                             SetFocusOnError="true"
                             Display="Dynamic"></asp:CustomValidator>
                     </div>
-
                 </div>
                 <div class="form-group row">
 
@@ -70,7 +69,7 @@
                             SetFocusOnError="true"
                             ValidationGroup="Registrar"
                             Display="Dynamic"></asp:RequiredFieldValidator>
-<%--     <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
+                        <%--     <asp:RegularExpressionValidator ID="RegularExpressionValidator1"
                             runat="server"
                             ErrorMessage="El precio solo debe contener números"
                             ControlToValidate="txtPrecio"
@@ -83,38 +82,76 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                 <asp:Label ID="Label4" runat="server" CssClass="col-sm-2 col-form-label" Text="Precio">Imagen</asp:Label>
-                        <asp:Image ID="iVerImagen"  runat="server" />
-                        <asp:FileUpload ID="fuploadImagen" runat="server" accept=".png" CssClass="form-control"  />
-                 
+                    <asp:Label ID="Label4" runat="server" CssClass="col-sm-2 col-form-label" Text="Precio">Imagen</asp:Label>
+                    <asp:Image ID="iVerImagen" runat="server" />
+                    <asp:FileUpload ID="fuploadImagen" runat="server" accept=".png" CssClass="form-control" />
+
 
                 </div>
-
-
-                <asp:Button ID="btnRegistrar" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" runat="server" Text="Registrar" />
-          </fieldset>
-        </div>
-        <div class="col col-lg-6">
-            <fieldset>
-                <legend>Lista de Reservas</legend>
-                <asp:GridView ID="grvListado" runat="server"
-                    CssClass="table table-hover"
-                    AutoGenerateColumns="false">
-                    <Columns>
-                        <asp:BoundField DataField="fecha" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha"></asp:BoundField>
-                        <asp:BoundField DataField="nombreCliente" HeaderText="Cliente" />
-
-                        <asp:BoundField DataField="actividad.nombre" HeaderText="Actividad"></asp:BoundField>
-
-                        <asp:BoundField DataField="total" DataFormatString="${0:N2}" HeaderText="Total"></asp:BoundField>
-                        <asp:BoundField DataField="usuario.email" HeaderText="Usuario"></asp:BoundField>
-                    </Columns>
-
-
-
-                    <HeaderStyle CssClass="table-info" />
-                </asp:GridView>
+                <div class="text-center">
+                    <asp:Button ID="btnRegistrar" OnClick="btnRegistrar_Click" CssClass="btn btn-primary form-group" runat="server" Text="Registrar" />
+                </div>
             </fieldset>
+        </div>
+        <div class="col-xl-6">
+            <asp:GridView ID="grvListado" CssClass="table text-justify table-bordered text-center" OnRowCommand="grvListado_RowCommand" DataKeyNames="idProducto" runat="server" AutoGenerateColumns="False" ForeColor="#333333">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
+                <Columns>
+
+                    <asp:BoundField DataField="nombre" HeaderText="Nombre" ItemStyle-CssClass="align-middle" />
+                    <asp:BoundField DataField="precio" DataFormatString=" ₡{0:N0}" HeaderText="Precio" ItemStyle-CssClass="align-middle" />
+                    <asp:BoundField DataField="categoria.nombre" HeaderText="Categoría" ItemStyle-CssClass="align-middle" />
+                    <asp:TemplateField HeaderText="Cupón">
+                        <ItemTemplate>
+                            <asp:ImageButton ID="btnShowModal" runat="server" CommandName="cupon" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Img/cupon.png" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                </Columns>
+                <EditRowStyle BackColor="#999999"></EditRowStyle>
+
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
+
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
+
+                <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
+
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
+
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
+
+                <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
+
+                <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
+
+                <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
+
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
+            </asp:GridView>
+
+            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">
+                                        <asp:Label ID="lblModalTitle" runat="server" Text=""></asp:Label></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <asp:Label ID="lblModalBody" runat="server" Text=""></asp:Label>
+                                    <asp:TextBox ID="txtNombProducto" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+
         </div>
     </div>
 </asp:Content>

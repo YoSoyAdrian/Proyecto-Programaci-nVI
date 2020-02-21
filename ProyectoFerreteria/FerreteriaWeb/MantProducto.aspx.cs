@@ -22,6 +22,9 @@ namespace FerreteriaWeb
                 ddlCategoria.DataTextField = "nombre";
                 ddlCategoria.DataValueField = "idCategoria";
                 ddlCategoria.DataBind();
+
+                grvListado.DataSource = ProductoLN.ObtenerTodos();
+                grvListado.DataBind();
             }
         }
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,7 +44,7 @@ namespace FerreteriaWeb
             producto.nombre = txtNombre.Text;
             producto.descripcion = txtDescripcion.Text;
             producto.precio = Convert.ToDecimal(txtPrecio.Text);
-            producto.categoria.idCategoria=Convert.ToInt32(ddlCategoria.SelectedValue);
+            producto.categoria.idCategoria = Convert.ToInt32(ddlCategoria.SelectedValue);
 
 
             //Obtener imagen
@@ -57,6 +60,34 @@ namespace FerreteriaWeb
             ProductoLN.Nuevo(producto);
         }
 
-      
+        protected void grvListado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grvListado_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            try
+            {
+                int indice = Convert.ToInt32(e.CommandArgument);
+
+                int id = Convert.ToInt32(grvListado.DataKeys[indice].Values["idProducto"]);
+
+                if (e.CommandName == "cupon")
+                {
+                    Session["idProducto"]= ProductoLN.Obtener(id).nombre;
+                    Response.Redirect("RegistrarCupon.aspx");
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

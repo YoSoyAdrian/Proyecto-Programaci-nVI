@@ -15,7 +15,7 @@ namespace FerreteriaWeb
         {
 
         }
-       
+
 
         protected void btnSeleccionar_Command(object sender, CommandEventArgs e)
         {
@@ -32,5 +32,6 @@ namespace FerreteriaWeb
         {
             return ProductoLN.ObtenerTodos();
         }
+
     }
 }

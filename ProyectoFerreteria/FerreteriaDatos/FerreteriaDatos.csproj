@@ -43,11 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriaDatos.cs" />
+    <Compile Include="ClienteDatos.cs" />
+    <Compile Include="CuponDatos.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseFactory.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="ProductoDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangoDatos.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FerreteriaEntidad\FerreteriaEntidad.csproj">
