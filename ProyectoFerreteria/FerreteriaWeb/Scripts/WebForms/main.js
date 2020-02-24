@@ -1,5 +1,4 @@
-﻿
-function mostrarContra() {
+﻿function mostrarContra() {
     var x = document.getElementById("txtPassword");
     if (x.type === "password") {
         x.type = "text";

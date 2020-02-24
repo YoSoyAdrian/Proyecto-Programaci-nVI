@@ -17,12 +17,19 @@ namespace FerreteriaEntidad
         public string contrasenna { get; set; }
         public string telefono { get; set; }
         public string direccion { get; set; }
-        public Rango rango  { get; set; }
-        public List<Compra> compras { get; set; }
+        public Rango rango { get; set; }
+
         public Cliente()
         {
             this.rango = new Rango();
-            this.compras = new List<Compra>();
         }
+
+        public Cliente(string correo, string contrasenna)
+        {
+            this.correo = correo;
+            this.contrasenna = contrasenna;
+            this.rango = new Rango();
+        }
+
     }
 }

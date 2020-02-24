@@ -22,6 +22,8 @@ namespace FerreteriaLogica
                 registro.idRango = Convert.ToInt32(fila["idRango"]);
                 registro.nombre = fila["nombre"].ToString();
                 registro.montoMinimo = Convert.ToDecimal(fila["montoMinimo"]);
+                registro.montoMaximo = Convert.ToDecimal(fila["montoMaximo"]);
+                registro.imagen = (byte[])fila["imagen"];
 
                 lista.Add(registro);
             }
