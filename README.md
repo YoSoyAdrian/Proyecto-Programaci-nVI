@@ -1,2 +1,2 @@
-# Proyecto-Programaci-nVI
+# Proyecto-ProgramacionVI
 GESTIÓN DE PEDIDOS O COMPRAS
