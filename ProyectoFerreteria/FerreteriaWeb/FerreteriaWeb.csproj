@@ -106,6 +106,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilo.css" />
+    <Content Include="Content\sweetalert2.min.css" />
     <Content Include="Img\cupon.png" />
     <Content Include="Img\eyenClose.png" />
     <Content Include="Img\eyeOpen.png" />
@@ -151,6 +152,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\mensaje.js" />
+    <Content Include="Scripts\sweetalert2.all.min.js" />
+    <Content Include="Scripts\sweetalert2.js" />
+    <Content Include="Scripts\sweetalert2.min.js" />
     <Content Include="Scripts\WebForms\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -342,6 +347,9 @@
       <Project>{c0e78a04-ff21-4eb2-840d-be5d4d2c12a7}</Project>
       <Name>FerreteriaLogica</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

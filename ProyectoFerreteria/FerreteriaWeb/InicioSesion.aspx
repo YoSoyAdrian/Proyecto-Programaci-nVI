@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="InicioSesion.aspx.cs" Inherits="FerreteriaWeb.InicioSesion" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script src="Scripts/sweetalert2.min.js"></script>
+    <script src="Scripts/mensaje.js"></script>
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
     <style>
         html {
             height: 100%;
@@ -15,7 +18,7 @@
         }
     </style>
 
-    <div class="row m-xl-5 p-xl-5 justify-content-center">
+    <div class="row p-xl-5 justify-content-center">
 
         <div class=" container text-center m-4 bg-dark col-sm-6 col-md-11 col-xl-6 pt-xl-1  form-group">
 

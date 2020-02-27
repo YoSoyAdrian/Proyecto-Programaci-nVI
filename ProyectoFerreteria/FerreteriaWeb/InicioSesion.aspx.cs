@@ -18,19 +18,25 @@ namespace FerreteriaWeb
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Cliente user = new Cliente(txtUsuario.Text,txtPassword.Text);
-          
+            Cliente user = new Cliente(txtUsuario.Text, txtPassword.Text);
+
 
             Cliente userVerificado;
             userVerificado = ClienteLN.verificarCredenciales(user);
             if (userVerificado != null)
             {
                 Session["Cliente"] = (Cliente)userVerificado;
-                Response.Redirect("PaginaPrincipal.aspx");
+                ClientScript.RegisterStartupScript(this.GetType(), "Inicio de Sesión",
+     "mensajeRedirect('Inicio de Sesión','Credenciales correctas','success','PaginaPrincipal.aspx')", true);
             }
             else
             {
-
+                ClientScript.RegisterStartupScript(
+                  this.GetType(),
+                  "Inicio de Sesión",
+                   "mensajeRedirect('Inicio de Sesión','Verifique las credenciales','error','InicioSesion.aspx')",
+                  true
+                  );
                 lblValidacion.Text = "Correo Electronico o Contraseña incorrecto";
                 txtPassword.Text = "";
             }

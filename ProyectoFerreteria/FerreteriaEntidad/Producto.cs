@@ -14,8 +14,8 @@ namespace FerreteriaEntidad
         public decimal precio { get; set; }
         public Categoria categoria { get; set; }
         public byte[] imagen { get; set; }
+        public int cantidad { get; set; }
 
-      
         public Producto()
         {
             categoria = new Categoria();

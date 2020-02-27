@@ -28,6 +28,7 @@ namespace FerreteriaLogica
                 registro.categoria.idCategoria = Convert.ToInt32(fila["categoria"]);
                 registro.categoria.nombre = CategoriaLN.Obtener(registro.categoria.idCategoria).nombre;
                 registro.imagen = (byte[])fila["imagen"];
+                registro.cantidad = Convert.ToInt32(fila["cantidad"]);
                 lista.Add(registro);
             }
             return lista;

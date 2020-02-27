@@ -80,10 +80,10 @@
                         <asp:RadioButton ID="rBtnJardin" CssClass="" Text="Jardinería" GroupName="categoria" Checked="false" runat="server" AutoPostBack="true" />
                     </div>
                     <div class="col-xl-12">
-                        <asp:RadioButton ID="RadioButton1" CssClass="" Text="Plomería" GroupName="categoria" runat="server" />
+                        <asp:RadioButton ID="rBtnPlomeria" CssClass="" Text="Plomería" GroupName="categoria" runat="server" />
                     </div>
                     <div class="col-xl-12">
-                        <asp:RadioButton ID="RadioButton2" CssClass="" Text="Pintura" GroupName="categoria" runat="server" />
+                        <asp:RadioButton ID="rBtnPintura" CssClass="" Text="Pintura" GroupName="categoria" runat="server" />
                     </div>
                 </div>
             </div>
@@ -94,6 +94,7 @@
                 GroupItemCount="4"
                 ItemType="FerreteriaEntidad.Producto"
                 SelectMethod="listaProductos_GetData"
+              
                 DataKeyNames="idProducto">
                 <%-- Sin datos --%>
                 <EmptyDataTemplate>
@@ -121,7 +122,7 @@
                         <article class="card card--2 form-group col-xl-12 col-sm-12 col-md-12">
                             <div class="card__info-hover form-group">
                                 <div class="card__clock-info ">
-                                    <span class="card__time"><%# Eval("precio","${0:N0}") %></span>
+                                    <span class="card__time"><%# Eval("precio","₡{0:N0}") %></span>
                                 </div>
                             </div>
                             <div class="card__img form-group "></div>
@@ -136,7 +137,7 @@
                                 <div class="form-group text-center">
                                     <asp:Button CssClass="btn btn-primary "
                                         ID="btnSeleccionar"
-                                        runat="server" Text="Seleccionar"
+                                        runat="server" CommandName="Seleccionar" Text="Añadir"
                                         CommandArgument="<%#:Item.idProducto%>"
                                         OnCommand="btnSeleccionar_Command" />
                                 </div>

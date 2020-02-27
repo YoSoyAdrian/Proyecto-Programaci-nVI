@@ -11,30 +11,30 @@ namespace FerreteriaDatos
 {
     public class ProductoDatos
     {
-       
-            //Listar todos los productos
-            public static DataSet SeleccionarTodos()
-            {
-                Database db = DatabaseFactory.CreateDatabase("Default");
-                SqlCommand comando = new SqlCommand("PA_ListarProductos");
-                comando.CommandType = CommandType.StoredProcedure;
-                DataSet ds = db.ExecuteReader(comando, "Producto");
-                return ds;
-            }
 
-            public static void Insertar(Producto producto)
-            {
-                Database db = DatabaseFactory.CreateDatabase("Default");
-                SqlCommand comando = new SqlCommand("PA_InsertarProducto");
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.Parameters.AddWithValue("@nombre", producto.nombre);
-                comando.Parameters.AddWithValue("@descripcion", producto.descripcion);
-                comando.Parameters.AddWithValue("@precio", producto.precio);
-                comando.Parameters.AddWithValue("@imagen", producto.imagen);
-                comando.Parameters.AddWithValue("@categoria", producto.categoria.idCategoria);
+        //Listar todos los productos
+        public static DataSet SeleccionarTodos()
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ListarProductos");
+            comando.CommandType = CommandType.StoredProcedure;
+            DataSet ds = db.ExecuteReader(comando, "Producto");
+            return ds;
+        }
 
-                db.ExecuteNonQuery(comando);
-            }
+        public static void Insertar(Producto producto)
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_InsertarProducto");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@nombre", producto.nombre);
+            comando.Parameters.AddWithValue("@descripcion", producto.descripcion);
+            comando.Parameters.AddWithValue("@precio", producto.precio);
+            comando.Parameters.AddWithValue("@imagen", producto.imagen);
+            comando.Parameters.AddWithValue("@categoria", producto.categoria.idCategoria);
+            comando.Parameters.AddWithValue("@cantidad", producto.cantidad);
+            db.ExecuteNonQuery(comando);
+        }
 
     }
 }

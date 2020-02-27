@@ -21,6 +21,7 @@ namespace FerreteriaWeb
         {
             GrvListCliente.DataSource = ClienteLN.ObtenerTodos();
             GrvListCliente.DataBind();
+            
         }
     }
 }

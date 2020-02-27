@@ -24,22 +24,22 @@ namespace FerreteriaWeb
         protected global::System.Web.UI.WebControls.RadioButton rBtnJardin;
 
         /// <summary>
-        /// Control RadioButton1.
+        /// Control rBtnPlomeria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
+        protected global::System.Web.UI.WebControls.RadioButton rBtnPlomeria;
 
         /// <summary>
-        /// Control RadioButton2.
+        /// Control rBtnPintura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
+        protected global::System.Web.UI.WebControls.RadioButton rBtnPintura;
 
         /// <summary>
         /// Control listaProductos.

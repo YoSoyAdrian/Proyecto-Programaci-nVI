@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,31 +13,42 @@ namespace FerreteriaWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            listaCarrito.DataSource = ObtenerProductos();
+            listaCarrito.DataBind();
 
         }
+        public List<DetallePedido> ObtenerProductos()
+        {
+            
 
-        // El tipo devuelto puede ser modificado a IEnumerable, sin embargo, para ser compatible con la paginación y ordenación de 
-        //, se deben agregar los siguientes parametros:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
-        
+            List<DetallePedido> lista = new List<DetallePedido>();
+
+            DataTable dt = (DataTable)Session["pedido"];
+            foreach (DataRow fila in dt.Rows)
+            {
+                DetallePedido pedido = new DetallePedido();
+                Producto registro = new Producto();
+                registro.idProducto = Convert.ToInt32(fila["idProducto"]);
+                registro.nombre = fila["nombre"].ToString();
+                registro.descripcion = fila["descripcion"].ToString();
+                registro.precio = Convert.ToDecimal(fila["precio"]);
+                registro.imagen = ProductoLN.Obtener(registro.idProducto).imagen;
+                registro.cantidad = Convert.ToInt32(fila["cantidad"]);
+
+                pedido.productos = registro;
+                pedido.cantidad = registro.cantidad;
+                pedido.subTotal = registro.precio * registro.cantidad;
+                lista.Add(pedido);
+
+            }
+            return lista;
+        }
+
 
         protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
 
         }
 
-        // El tipo devuelto puede ser modificado a IEnumerable, sin embargo, para ser compatible con la paginación y ordenación de 
-        //, se deben agregar los siguientes parametros:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
-        public List<Producto> listaCarrito_GetData()
-        {
-            return ProductoLN.ObtenerTodos();
-        }
     }
 }
