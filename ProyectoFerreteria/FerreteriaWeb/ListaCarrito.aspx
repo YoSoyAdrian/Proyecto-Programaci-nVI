@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ListaCarrito.aspx.cs" Inherits="FerreteriaWeb.ListaCarrito" ClientIDMode="Static" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ListaCarrito.aspx.cs" Inherits="FerreteriaWeb.ListaCarrito" ClientIDMode="Static" EnableEventValidation="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row align-self-end ">
@@ -16,8 +16,9 @@
                 ItemType="FerreteriaEntidad.DetallePedido">
                 <%-- Sin datos --%>
                 <EmptyDataTemplate>
-                    <div>
-                        No hay datos
+                    <div class="alert-info text-center">
+                        <h2>¡No hay productos agregados! </h2>
+
                     </div>
                 </EmptyDataTemplate>
                 <%-- Item vacío --%>

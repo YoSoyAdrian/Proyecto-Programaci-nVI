@@ -12,7 +12,7 @@ using System.Text;
 namespace FerreteriaLogica
 {
     public class ProductoLN
-    { 
+    {
         public static List<Producto> ObtenerTodos()
         {
             List<Producto> lista = new List<Producto>();
@@ -39,12 +39,22 @@ namespace FerreteriaLogica
             Producto producto = lista.Where(x => x.idProducto == idProducto).FirstOrDefault();
             return producto;
         }
+        public static List<Producto> ObtenerXCategoria(int idCategoria)
+        {
+            List<Producto> lista = ProductoLN.ObtenerTodos();
+
+            List<Producto> producto = new List<Producto>();
+            producto = lista.Where(x => x.categoria.idCategoria == idCategoria).ToList();
+            return producto;
+
+
+        }
         public static void Nuevo(Producto producto)
         {
             ProductoDatos.Insertar(producto);
         }
-     
+
     }
-} 
-    
+}
+
 

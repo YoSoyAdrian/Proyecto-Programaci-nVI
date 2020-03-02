@@ -17,7 +17,16 @@ namespace FerreteriaWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarDetalle();
+            if (!IsPostBack)
+            {
+                rBtnJardin.Checked = false;
+                rBtnPlomeria.Checked = false;
+                rBtnPintura.Checked = false;
+                CargarDetalle();
+                filtro();
+            }
+
+
         }
         public void CargarDetalle()
         {
@@ -34,7 +43,7 @@ namespace FerreteriaWeb
             }
             else
             {
-                Session["pedido"] = Session["prueba"];
+                Session["prueba"] = dtb;
             }
 
 
@@ -42,7 +51,7 @@ namespace FerreteriaWeb
 
         protected void btnSeleccionar_Command(object sender, CommandEventArgs e)
         {
-            if (e.CommandName == "Seleccionar")
+            if (e.CommandName == "Seleccionar" )
             {
                 int id = int.Parse(e.CommandArgument.ToString());
                 Producto producto = ProductoLN.Obtener(id);
@@ -73,11 +82,61 @@ namespace FerreteriaWeb
             }
             return 1;
         }
+        public void filtro()
+        {
+            List<Producto> lista = new List<Producto>();
+
+            if (rBtnJardin.Checked)
+            {
+                lista = ProductoLN.ObtenerXCategoria(1);
+            }
+            else
+            {
+                if (rBtnPintura.Checked)
+                {
+                    lista = ProductoLN.ObtenerXCategoria(2);
+                }
+                else
+                {
+                    if (rBtnPlomeria.Checked)
+                    {
+                        lista = ProductoLN.ObtenerXCategoria(3);
+                    }
+                    else
+                    {
+                        lista = ProductoLN.ObtenerTodos();
+                    }
+
+                }
+            }
+            listaProductos.DataSource = lista;
+            if (!IsCallback)
+            {
+                listaProductos.DataBind();
+            }
+
+        }
+        protected void rBtnPintura_CheckedChanged(object sender, EventArgs e)
+        {
+            filtro();
+        }
+
+        protected void rBtnPlomeria_CheckedChanged(object sender, EventArgs e)
+        {
+            filtro();
+        }
+
+        protected void rBtnJardin_CheckedChanged(object sender, EventArgs e)
+        {
+            filtro();
+        }
+       
         public List<Producto> listaProductos_GetData()
         {
+
             return ProductoLN.ObtenerTodos();
         }
 
+            }
 
-    }
 }
