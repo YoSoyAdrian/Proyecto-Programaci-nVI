@@ -13,7 +13,9 @@
         <div class="col-xl-12 col-sm-12 form-group">
             <asp:ListView ID="listaCarrito" runat="server"
                 GroupItemCount="1"
-                ItemType="FerreteriaEntidad.DetallePedido">
+                ItemType="FerreteriaEntidad.DetallePedido"
+                DataKeyNames="idDetalle">
+
                 <%-- Sin datos --%>
                 <EmptyDataTemplate>
                     <div class="alert-info text-center">
@@ -37,6 +39,7 @@
                     <div class="container-fluid">
                         <div class="row col-xl-12 border border-bottom form-group">
                             <div class="form-group col-xl-2 align-self-center text-center">
+                                <asp:TextBox ID="TextBox1" runat="server" Visible="false" Text="<%#:Item.idDetalle %>"></asp:TextBox>
                                 <asp:Image ID="Image1" runat="server" CssClass="img-thumbnail mt-2" ImageUrl='<%# "data:image/png;base64," + Convert.ToBase64String((byte[])Eval("productos.imagen"))  %>' />
                                 <span class="card__info text-danger"><%# Eval("productos.precio","₡{0:N0}") %></span>
                             </div>
@@ -55,20 +58,30 @@
                                             <asp:Label ID="lblCantidad" runat="server" Text="Cantidad" CssClass="form-group font-weight-bold"> </asp:Label>
                                         </div>
                                         <div class="col-xl-12 form-group ">
-                                            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control m-2 text-center" ReadOnly="true" Text="<%#:Item.cantidad %>"></asp:TextBox>
+
+                                            <asp:TextBox ID="txtCantidad" TextMode="Number" runat="server" CssClass="form-control m-2 text-center" OnTextChanged="txtCantidad_TextChanged" AutoPostBack="true" Text="<%#:Item.cantidad %>"></asp:TextBox>
                                         </div>
                                         <div class="col-xl-12 text-center">
                                             <asp:Button CssClass="btn btn-danger form-group"
                                                 ID="btnEliminar"
                                                 runat="server" Text="Eliminar"
-                                                OnCommand="btnEliminar_Command" />
+                                                OnCommand="btnEliminar_Command" CommandArgument="<%#: Item.productos.idProducto %>" />
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12 text-center  align-self-end">
-                                        <asp:Label ID="lblCosto" runat="server"  CssClass="form-group"><%# Eval("subTotal","₡{0:N0}")%></asp:Label>
+                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                                            <ContentTemplate>
+                                                <asp:Label ID="lblCosto"  runat="server" CssClass="form-group"><%# Eval("subTotal","₡{0:N0}")%></asp:Label>
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="txtCantidad" EventName="TextChanged" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+
+
                                     </div>
                                 </div>
 
@@ -87,9 +100,28 @@
         </div>
     </div>
     <div class="row">
+   
+                <div class=" container-fluid">
+                    <div class="form-group">
+                        <asp:Label ID="lblSubTCompra" runat="server" Text="Sub total: "></asp:Label>
+                        <asp:TextBox ID="txtSubTotal" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label ID="lblDescuento" runat="server" Text="Descuento: "></asp:Label>
+                        <asp:TextBox ID="txtDescuento" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label ID="lblTotalCompra" runat="server" Text="Total a pagar: "></asp:Label>
+                        <asp:TextBox ID="txtTotal" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                </div>
+         
+          
+    </div>
+    <div class="row">
         <div class="col-xl-12 text-center">
 
-            <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-primary" Text="Registrarse o iniciar sesión para continuar la compra" />
+            <asp:Button ID="btnRegistrar" runat="server" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" Text="Registrarse o iniciar sesión para continuar la compra" />
         </div>
     </div>
 

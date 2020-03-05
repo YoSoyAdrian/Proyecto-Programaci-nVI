@@ -24,11 +24,22 @@ namespace FerreteriaDatos
             Database db = DatabaseFactory.CreateDatabase("Default");
             SqlCommand comando = new SqlCommand("PA_InsertarCupon");
             comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@idCupon", cupon.idCupon);
             comando.Parameters.AddWithValue("@nombre", cupon.nombre);
             comando.Parameters.AddWithValue("@descripcion", cupon.descripcion);
             comando.Parameters.AddWithValue("@cantidad", cupon.cantidad);
             comando.Parameters.AddWithValue("@producto", cupon.producto.idProducto);
             comando.Parameters.AddWithValue("@rango", cupon.rango.idRango);
+
+            db.ExecuteNonQuery(comando);
+        }
+        public static void InsertarCliente(int idCupon, int idCliente)
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_InsertarCuponCliente");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@idCupon", idCupon);
+            comando.Parameters.AddWithValue("@idCliente", idCliente);
 
             db.ExecuteNonQuery(comando);
         }

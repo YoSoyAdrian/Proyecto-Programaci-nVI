@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FerreteriaEntidad
 {
+    [Serializable]
     public class Producto
     {
         public int idProducto { get; set; }

@@ -20,6 +20,11 @@ namespace FerreteriaWeb
                 ActualizarRango();
                 ActualizarProducto();
             }
+            ddlRango.SelectedIndex = -1;
+            ddlProducto.SelectedIndex = -1;
+            rdbDescuento.Checked = false;
+            rdbRegalia.Checked = false;
+
         }
         public void ActualizarRango()
         {
@@ -41,29 +46,55 @@ namespace FerreteriaWeb
         {
             args.IsValid = args.Value.Length >= 3;
         }
+        protected static int Random()
+        {
+            int value = 0;
+            for (int i = 0; i <= 10; i++)
+            {
+                var guid = Guid.NewGuid();
+                var justNumbers = new String(guid.ToString().Where(Char.IsDigit).ToArray());
+                var seed = int.Parse(justNumbers.Substring(0, 4));
 
+                var random = new Random(seed);
+                value = random.Next(0, 9999);
+
+
+            }
+            return value;
+        }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
             {
-                Cupon cupon = new Cupon()
+                if (ddlProducto.SelectedIndex != -1 && ddlRango.SelectedIndex != -1)
                 {
-                    nombre = txtNombre.Text,
-                    descripcion = txtDescripcion.Text,
-                    cantidad = Convert.ToInt32(txtCantidad.Text),
-                };
-                cupon.producto.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
-                cupon.rango.idRango = Convert.ToInt32(ddlRango.SelectedValue);
-                CuponLN.Nuevo(cupon);
-                txtCantidad.Text = "";
-                txtDescripcion.Text = "";
-                txtNombre.Text = "";
+
+                    Cupon cupon = new Cupon()
+                    {
+                        idCupon = Random(),
+                        nombre = txtNombre.Text,
+                        descripcion = txtDescripcion.Text,
+                        cantidad = Convert.ToInt32(txtCantidad.Text),
+                    };
+                    cupon.producto.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
+                    cupon.rango.idRango = Convert.ToInt32(ddlRango.SelectedValue);
+                    CuponLN.Nuevo(cupon);
+
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Carrito",
+          "mensajeConfirm('Agregado correctamente')", true);
+
+                    txtCantidad.Text = "";
+                    txtDescripcion.Text = "";
+                    txtNombre.Text = "";
+                }
             }
             catch (Exception)
             {
 
                 throw;
             }
+
         }
 
         protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +102,22 @@ namespace FerreteriaWeb
 
         }
         public List<Cupon> listaCupon_GetData()
+        {
+            return CuponLN.ObtenerTodos();
+        }
+
+
+        protected void listaCupon_ItemCreated(object sender, ListViewItemEventArgs e)
+        {
+
+        }
+
+        protected void btnRegistrar_Command(object sender, CommandEventArgs e)
+        {
+        
+        }
+
+        public List<Cupon>grvCupon_GetData()
         {
             return CuponLN.ObtenerTodos();
         }

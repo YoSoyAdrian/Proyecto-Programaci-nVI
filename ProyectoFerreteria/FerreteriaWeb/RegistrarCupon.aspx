@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-sm-10 col-xl-10 form-group">
                         <%-- Rangos--%>
-                        <asp:DropDownList ID="ddlRango" DataTextField="nombre" DataValueField="idRango" OnSelectedIndexChanged="ddlRango_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlRango" DataTextField="nombre" DataValueField="idRango" ValidationGroup="Registrar" OnSelectedIndexChanged="ddlRango_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
                     </div>
                     <div class="col-xl-2 form-group">
                         <asp:Label ID="Label4" runat="server" CssClass="col-sm-2 col-form-label" Text="Producto"></asp:Label>
@@ -62,17 +62,17 @@
 
                     <div class="col-sm-10 col-xl-10 form-group">
                         <%-- Productos--%>
-                        <asp:DropDownList ID="ddlProducto" DataTextField="nombre" DataValueField="idProducto" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlProducto" DataTextField="nombre" ValidationGroup="Registrar" DataValueField="idProducto" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
 
                     </div>
                 </div>
                 <div class="row form-group justify-content-center">
                     <div class="col-xl-3 col-sm-12 text-center ">
-                        <asp:RadioButton ID="rdbDescuento" Text=" " CssClass="custom-radio " runat="server" />
+                        <asp:RadioButton ID="rdbDescuento" Text=" " GroupName="rdBtn" ValidationGroup="Registrar" CssClass="custom-radio " runat="server" />
                         <asp:Label ID="Label7" runat="server" Text="Descuento"></asp:Label>
                     </div>
                     <div class="col-xl-3 col-sm-12 text-center ">
-                        <asp:RadioButton ID="rdbRegalia" CssClass="custom-radio " Text=" " runat="server" />
+                        <asp:RadioButton ID="rdbRegalia" CssClass="custom-radio " GroupName="rdBtn" Text=" " ValidationGroup="Registrar" runat="server" />
                         <asp:Label ID="Label6" runat="server" Text="Regalía"></asp:Label>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         <asp:Label ID="Label5" runat="server" CssClass="col-sm-2 col-form-label" Text="Cantidad"></asp:Label>
                     </div>
                     <div class="col-sm-10 col-xl-10">
-                        <asp:TextBox ID="txtCantidad" CssClass="form-control" runat="server" Text="1" TextMode="Number"></asp:TextBox>
+                        <asp:TextBox ID="txtCantidad" CssClass="form-control" runat="server" ValidationGroup="Registrar" Text="1" TextMode="Number"></asp:TextBox>
 
                         <asp:RequiredFieldValidator
                             ID="RequiredFieldValidator4"
@@ -105,67 +105,24 @@
                     </div>
                 </div>
                 <div class="form-group text-center">
-                    <asp:Button ID="btnRegistrar" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" runat="server" Text="Registrar" />
+                    <asp:Button ID="btnRegistrar" OnClick="btnRegistrar_Click" ValidationGroup="Registrar" OnCommand="btnRegistrar_Command" CssClass="btn btn-primary" runat="server" Text="Registrar" />
                 </div>
             </fieldset>
         </div>
+        
         <div class="col-xl-6 col-sm-12 form-group">
-            <asp:ListView ID="listaCupon" runat="server"
-                GroupItemCount="4"
-                ItemType="FerreteriaEntidad.Cupon"
-                SelectMethod="listaCupon_GetData"
-                DataKeyNames="idCupon">
-                <%-- Sin datos --%>
-                <EmptyDataTemplate>
-                    <div>
-                        No hay datos
-                    </div>
-                </EmptyDataTemplate>
-                <%-- Item vacío --%>
-                <EmptyItemTemplate>
-                    <div>
-                    </div>
-                </EmptyItemTemplate>
-                <%-- Grupo o fila --%>
-                <GroupTemplate>
-                    <div class="row col-sm-12 ">
-                        <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
-                    </div>
-                </GroupTemplate>
-                <%--Datos del item --%>
-                <ItemTemplate>
-                    <div class="row col-xl-4 col-sm-12">
-                       
+            <div class="col-xl-6">
+            <h2>Cupones</h2>
+        </div>
+            <asp:GridView ID="grvCupon" runat="server" CssClass="table table-active" AutoGenerateColumns="False" DataKeyNames="idCupon" SelectMethod="grvCupon_GetData" >
 
-                            <article class="card card--2 form-group col-xl-12 col-sm-12">
-                                <div class="card__info-hover form-group">
-                                    <div class="card__clock-info ">
-                                        <span class="card__time"><%# Eval("cantidad","{0:N0}")%></span>
-                                    </div>
-                                </div>
-                                
-                                <div class="card__info form-group">
-                                    <span class="card__category form-group "><%#:Item.nombre %> </span>
-                                    <h3 class="card__by form-group"><%#:Item.producto.nombre%></h3>
-                                    <div class="form-group text-center">
-                                        <asp:Button CssClass="btn btn-primary "
-                                            ID="btnSeleccionar"
-                                            runat="server" Text="Seleccionar"
-                                            CommandArgument="<%#:Item.idCupon%>"
-                                            />
-                                    </div>
-
-                                </div>
-                            </article>
-                        </div>
-                                </ItemTemplate>
-                <%-- Contenedor principal --%>
-                <LayoutTemplate>
-                    <div>
-                        <asp:PlaceHolder ID="groupPlaceHolder" runat="server"></asp:PlaceHolder>
-                    </div>
-                </LayoutTemplate>
-            </asp:ListView>
+                <Columns>
+                    <asp:BoundField HeaderText="Nombre" DataField="nombre"></asp:BoundField>
+                    <asp:BoundField HeaderText="C&#243;digo" DataField="idCupon"></asp:BoundField>
+                    <asp:BoundField DataField="cantidad" HeaderText="Cantidad"></asp:BoundField>
+                    <asp:CommandField ShowSelectButton="True" HeaderText="Asignar Cliente" ButtonType="Link" ></asp:CommandField>
+                </Columns>
+            </asp:GridView>
         </div>
     </div>
 </asp:Content>

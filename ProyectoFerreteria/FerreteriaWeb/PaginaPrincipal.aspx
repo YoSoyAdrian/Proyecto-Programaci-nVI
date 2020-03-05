@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <link href="Content/estilo.css" rel="stylesheet" />
+
     <style>
         .showOverlay {
             bottom: 0;
@@ -95,8 +96,7 @@
         </div>
 
         <div class="col-xl-10 col-sm-12 col-md-12 form-group">
-            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                <ContentTemplate>--%>
+           
             <asp:ListView ID="listaProductos" runat="server"
                 GroupItemCount="4"
                 ItemType="FerreteriaEntidad.Producto"
@@ -163,14 +163,7 @@
                     </div>
                 </LayoutTemplate>
             </asp:ListView>
-            <%--   </ContentTemplate>
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="rBtnJardin" EventName="CheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="rBtnPlomeria" EventName="CheckedChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="rBtnPintura" EventName="CheckedChanged" />
-                    
-                </Triggers>
-            </asp:UpdatePanel>--%>
+          
         </div>
 
     </div>
