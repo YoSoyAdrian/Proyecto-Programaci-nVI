@@ -1,12 +1,14 @@
-﻿using System;
+﻿using FerreteriaEntidad;
+using FerreteriaLogica;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using FerreteriaEntidad;
-using FerreteriaLogica;
+
 namespace FerreteriaWeb
 {
     public partial class ListaCarrito : System.Web.UI.Page
@@ -19,6 +21,7 @@ namespace FerreteriaWeb
             {
                 CargarCarrito();
                 CargarDetalle();
+
             }
 
         }
@@ -37,11 +40,11 @@ namespace FerreteriaWeb
                 dtb.Columns.Add("cantidad");
                 dtb.Columns.Add("subTotal");
                 Session["pedidoT"] = dtb;
-                Session["prueba"] = dtb;
+                Session["pruebaT"] = dtb;
             }
             else
             {
-                Session["prueba"] = dtb;
+                Session["pruebaT"] = dtb;
             }
 
         }
@@ -66,7 +69,22 @@ namespace FerreteriaWeb
             }
             return lista;
         }
+        public void Total()
+        {
+            decimal subTotal = 0;
+            decimal total = 0;
+            foreach (DetallePedido detalle in ObtenerPedido())
+            {
+                subTotal += detalle.subTotal;
+                total = detalle.subTotal;
+            }
+            ContentPlaceHolder cph = (ContentPlaceHolder)this.Master.FindControl("ContentPlaceHolder1");
+            TextBox txtTotal = ((TextBox)cph.FindControl("txtTotal"));
+            txtSubTotal.Text = subTotal.ToString();
+            txtTotal.Text = total.ToString();
 
+
+        }
 
         protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
@@ -118,12 +136,9 @@ namespace FerreteriaWeb
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(listaCarrito.SelectedDataKey);
-            DetallePedido detallePedido = ObtenerPedido().Find(x => x.productos.idProducto == id);
-            TextBox tb = (TextBox)FindControl("txtCantidad");
-            int cantidad = Convert.ToInt32(tb.Text);
-            Label lblCosto = (Label)FindControl("lblCosto");
-            lblCosto.Text = (detallePedido.productos.precio * cantidad).ToString("N2");
+            Total();
+
+
 
         }
 
@@ -132,7 +147,7 @@ namespace FerreteriaWeb
             Compra compra = new Compra();
             compra.pedidos = ObtenerPedido();
             DateTime fechaHoy = DateTime.Now;
-           
+
             Cliente user = (Cliente)Session["Cliente"];
             compra.cliente = user;
             compra.fecha = fechaHoy;
@@ -144,5 +159,18 @@ namespace FerreteriaWeb
                 true
                 );
         }
+
+        protected void btnAgregar_Command(object sender, CommandEventArgs e)
+        {
+
+        }
+
+        protected void listaCarro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+      
     }
+
 }

@@ -6,3 +6,11 @@
         x.type = "password";
     }
 }
+function GetValue(txtCantidad) {
+    var control = eval(txtCantidad);
+    alert(control.value);
+}
+$("txtCantidad").click(function () {
+    var oID = $(this).attr("idDetalle");
+    console.log(oID);
+});

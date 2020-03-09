@@ -13,19 +13,12 @@
        
         <div class="col-xl-6 form-group">
 
-            <div class="col-xl-12 form-group">
-                <asp:Label ID="Label1" runat="server" Text="Correo del cliente"></asp:Label>
-
-            </div>
-            <div class="col-xl-12 form-group">
-                <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
             <div class="col-xl-6">
                  <asp:Label ID="Label3" runat="server" Text="Cliente"></asp:Label>
             </div>
             
             <div class="col-xl-6">
-                <asp:DropDownList ID="ddlUsuario" DataTextField="nombre" DataValueField="idCliente"  runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlUsuario" DataTextField="nombre" CssClass="form-control" DataValueField="idCliente"  runat="server"></asp:DropDownList>
             </div>
         </div>
         <div class="col-xl-6 text-center form-group">

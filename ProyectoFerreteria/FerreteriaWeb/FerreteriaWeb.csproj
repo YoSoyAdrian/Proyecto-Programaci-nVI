@@ -107,6 +107,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilo.css" />
     <Content Include="Content\sweetalert2.min.css" />
+    <Content Include="CuponCliente.aspx" />
     <Content Include="Img\cupon.png" />
     <Content Include="Img\eyenClose.png" />
     <Content Include="Img\eyeOpen.png" />
@@ -246,6 +247,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CuponCliente.aspx.cs">
+      <DependentUpon>CuponCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CuponCliente.aspx.designer.cs">
+      <DependentUpon>CuponCliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.Master.cs">
       <DependentUpon>Home.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

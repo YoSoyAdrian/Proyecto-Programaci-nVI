@@ -1,16 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ListaCarrito.aspx.cs" Inherits="FerreteriaWeb.ListaCarrito" ClientIDMode="Static" EnableEventValidation="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ListaCarrito.aspx.cs" Inherits="FerreteriaWeb.ListaCarrito" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row align-self-end ">
-        <div class="col-xl-10 text-center ">
+    <div class="row">
+        <div class="col-xl-5 text-center ">
             <h2>Carrito de compras</h2>
         </div>
         <div class="col-xl-2 form-group text-center">
             <asp:Button ID="Button1" runat="server" CssClass="btn btn-warning m-2" Text="Limpiar Carrito" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-12 col-sm-12 form-group">
+    <div class="row ">
+        <div class="col-xl-8 col-sm-12 form-group">
+
+            <div class="col-xl-12 col-sm-12 form-group">
             <asp:ListView ID="listaCarrito" runat="server"
                 GroupItemCount="1"
                 ItemType="FerreteriaEntidad.DetallePedido"
@@ -47,9 +49,7 @@
                                 <div class="col-xl-12">
                                     <span class="form-group align-self-end text-uppercase font-weight-bolder"><%#:Item.productos.nombre%> </span>
                                 </div>
-                                <div class="col-xl-12">
-                                    <span class=" form-group "><%#:Item.productos.descripcion %> </span>
-                                </div>
+                               
                             </div>
                             <div class="col-xl-5">
                                 <div class="row">
@@ -98,31 +98,32 @@
                 </LayoutTemplate>
             </asp:ListView>
         </div>
-    </div>
-    <div class="row">
-   
-                <div class=" container-fluid">
-                    <div class="form-group">
-                        <asp:Label ID="lblSubTCompra" runat="server" Text="Sub total: "></asp:Label>
-                        <asp:TextBox ID="txtSubTotal" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label ID="lblDescuento" runat="server" Text="Descuento: "></asp:Label>
-                        <asp:TextBox ID="txtDescuento" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label ID="lblTotalCompra" runat="server" Text="Total a pagar: "></asp:Label>
-                        <asp:TextBox ID="txtTotal" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
+            </div>
+        <div class="col-xl-4">
+            <div class="col-xl-11 p-0 text-center">
+                <h2>Detalle de Compra</h2>
+            </div>
+            <div class="col-xl-11">
+                <div class="form-group">
+                    <asp:Label ID="lblSubTCompra" runat="server" Text="Sub total: "></asp:Label>
+                    <asp:TextBox ID="txtSubTotal" AutoPostBack="true" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                 </div>
-         
-          
-    </div>
-    <div class="row">
-        <div class="col-xl-12 text-center">
+                <div class="form-group">
+                    <asp:Label ID="lblDescuento" runat="server" Text="Descuento: "></asp:Label>
+                    <asp:TextBox ID="txtDescuento" AutoPostBack="true" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <asp:Label ID="lblTotalCompra" runat="server" Text="Total a pagar: "></asp:Label>
+                    <asp:TextBox ID="txtTotal" AutoPostBack="true" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <asp:Button ID="btnComprar" runat="server" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" Text="Comprar" />
+                </div>
 
-            <asp:Button ID="btnRegistrar" runat="server" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" Text="Registrarse o iniciar sesión para continuar la compra" />
+            </div>
+
         </div>
-    </div>
 
+    </div>
 </asp:Content>
+

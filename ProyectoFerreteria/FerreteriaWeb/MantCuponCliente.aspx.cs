@@ -15,6 +15,7 @@ namespace FerreteriaWeb
             if (!IsPostBack)
             {
                 ddlUsuario.DataSource = ClienteLN.ObtenerTodos();
+                ddlUsuario.DataBind();
             }
         }
     }

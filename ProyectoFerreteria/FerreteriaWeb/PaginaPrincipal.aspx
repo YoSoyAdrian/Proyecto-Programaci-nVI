@@ -100,7 +100,8 @@
             <asp:ListView ID="listaProductos" runat="server"
                 GroupItemCount="4"
                 ItemType="FerreteriaEntidad.Producto"
-                DataKeyNames="idProducto">
+                DataKeyNames="idProducto"
+               >
                 <%-- Sin datos --%>
                 <EmptyDataTemplate>
                     <div class="alert-info text-center">
