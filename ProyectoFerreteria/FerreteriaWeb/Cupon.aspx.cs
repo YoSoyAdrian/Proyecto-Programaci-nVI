@@ -14,9 +14,13 @@ namespace FerreteriaWeb
         {
             if (!IsPostBack)
             {
-                ddlUsuario.DataSource = ClienteLN.ObtenerTodos();
-                ddlUsuario.DataBind();
+                ddlRango.DataSource = RangoLN.ObtenerTodos();
+                ddlRango.DataBind();
+                grvListadoCupon.DataSource= CuponLN.ObtenerTodos();
+                grvListadoCupon.DataBind();
             }
         }
+
+      
     }
 }

@@ -128,7 +128,7 @@ namespace FerreteriaWeb
 
             if (rBtnJardin.Checked)
             {
-                lista = ProductoLN.ObtenerXCategoria(1);
+                lista = ProductoLN.ObtenerXCategoria(3);
             }
             else
             {
@@ -140,7 +140,7 @@ namespace FerreteriaWeb
                 {
                     if (rBtnPlomeria.Checked)
                     {
-                        lista = ProductoLN.ObtenerXCategoria(3);
+                        lista = ProductoLN.ObtenerXCategoria(1);
                     }
                     else
                     {

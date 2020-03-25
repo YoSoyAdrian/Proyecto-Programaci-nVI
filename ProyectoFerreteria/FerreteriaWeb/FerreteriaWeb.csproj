@@ -121,11 +121,11 @@
     <Content Include="InicioSesion.aspx" />
     <Content Include="ListaCarrito.aspx" />
     <Content Include="MantCliente.aspx" />
-    <Content Include="MantCuponCliente.aspx" />
+    <Content Include="Cupon.aspx" />
     <Content Include="MantProducto.aspx" />
     <Content Include="PaginaPrincipal.aspx" />
     <Content Include="RegistrarCupon.aspx" />
-    <Content Include="Registro.aspx" />
+    <Content Include="RegistroCompra.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -282,12 +282,12 @@
     <Compile Include="MantCliente.aspx.designer.cs">
       <DependentUpon>MantCliente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MantCuponCliente.aspx.cs">
-      <DependentUpon>MantCuponCliente.aspx</DependentUpon>
+    <Compile Include="Cupon.aspx.cs">
+      <DependentUpon>Cupon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MantCuponCliente.aspx.designer.cs">
-      <DependentUpon>MantCuponCliente.aspx</DependentUpon>
+    <Compile Include="Cupon.aspx.designer.cs">
+      <DependentUpon>Cupon.aspx</DependentUpon>
     </Compile>
     <Compile Include="MantProducto.aspx.cs">
       <DependentUpon>MantProducto.aspx</DependentUpon>
@@ -311,12 +311,12 @@
     <Compile Include="RegistrarCupon.aspx.designer.cs">
       <DependentUpon>RegistrarCupon.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Registro.aspx.cs">
-      <DependentUpon>Registro.aspx</DependentUpon>
+    <Compile Include="RegistroCompra.aspx.cs">
+      <DependentUpon>RegistroCompra.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registro.aspx.designer.cs">
-      <DependentUpon>Registro.aspx</DependentUpon>
+    <Compile Include="RegistroCompra.aspx.designer.cs">
+      <DependentUpon>RegistroCompra.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

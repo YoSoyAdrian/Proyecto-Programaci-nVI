@@ -12,21 +12,12 @@ namespace FerreteriaEntidad
         public Producto productos { get; set; }
         public int cantidad { get; set; }
         public decimal subTotal { get; set; }
-
-      public DetallePedido()
+   
+        public DetallePedido()
         {
            this.productos = new Producto();
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is DetallePedido pedido &&
-                   EqualityComparer<Producto>.Default.Equals(productos, pedido.productos);
-        }
-
-        public override int GetHashCode()
-        {
-            return 15118190 + EqualityComparer<Producto>.Default.GetHashCode(productos);
-        }
+     
     }
 }

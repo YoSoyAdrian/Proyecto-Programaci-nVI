@@ -13,134 +13,83 @@ namespace FerreteriaWeb
 {
     public partial class ListaCarrito : System.Web.UI.Page
     {
+        List<DetallePedido> lista;
         DataTable carrito = new DataTable();
         DataTable dtb;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                CargarCarrito();
                 CargarDetalle();
-
+                grvListaCarrito.DataSource = ObtenerPedido();
+                grvListaCarrito.DataBind();
+                Total();
             }
+           
+        }
 
-        }
-        public void CargarCarrito()
-        {
-            listaCarrito.DataSource = ObtenerPedido();
-            listaCarrito.DataBind();
-        }
+
         public void CargarDetalle()
         {
-            if (Session["pedidoT"] == null)
+            if (Session["pedido"] == null)
             {
-                dtb = new DataTable("CarritoT");
+                dtb = new DataTable("Carrito");
                 dtb.Columns.Add("idDetalle", System.Type.GetType("System.Int32"));
                 dtb.Columns.Add("productos", System.Type.GetType("System.Int32"));
                 dtb.Columns.Add("cantidad");
                 dtb.Columns.Add("subTotal");
-                Session["pedidoT"] = dtb;
-                Session["pruebaT"] = dtb;
+                Session["pedido"] = dtb;
+                Session["prueba"] = dtb;
             }
             else
             {
-                Session["pruebaT"] = dtb;
+                Session["prueba"] = dtb;
             }
 
         }
         public List<DetallePedido> ObtenerPedido()
         {
+            lista = new List<DetallePedido>();
 
-            List<DetallePedido> lista = new List<DetallePedido>();
 
             DataTable dt = (DataTable)Session["pedido"];
             foreach (DataRow fila in dt.Rows)
             {
                 DetallePedido pedido = new DetallePedido();
-                Producto prod = new Producto();
+                Producto prod;
                 pedido.idDetalle = Convert.ToInt32(fila["idDetalle"]);
                 prod = ProductoLN.Obtener(Convert.ToInt32(fila["productos"]));
-                pedido.productos = prod;
-
+                pedido.productos.idProducto = prod.idProducto;
+                pedido.productos.precio = prod.precio;
+                pedido.productos.cantidad = prod.cantidad;
+                pedido.productos.imagen = prod.imagen;
                 pedido.cantidad = Convert.ToInt32(fila["cantidad"]);
                 pedido.subTotal = Convert.ToDecimal(fila["subTotal"]);
                 lista.Add(pedido);
 
             }
+
             return lista;
         }
         public void Total()
         {
+            lista = new List<DetallePedido>();
             decimal subTotal = 0;
             decimal total = 0;
             foreach (DetallePedido detalle in ObtenerPedido())
             {
                 subTotal += detalle.subTotal;
-                total = detalle.subTotal;
+                total += detalle.subTotal;
             }
-            ContentPlaceHolder cph = (ContentPlaceHolder)this.Master.FindControl("ContentPlaceHolder1");
-            TextBox txtTotal = ((TextBox)cph.FindControl("txtTotal"));
+
             txtSubTotal.Text = subTotal.ToString();
             txtTotal.Text = total.ToString();
 
 
         }
 
-        protected void btnEliminar_Command(object sender, CommandEventArgs e)
-        {
-            int indice = Convert.ToInt32(e.CommandArgument);
-            DetallePedido d = ObtenerPedido().Find(x => x.productos.idProducto == indice);
 
-
-            List<DetallePedido> lista = new List<DetallePedido>();
-
-
-            DataTable dt = (DataTable)Session["pedido"];
-
-            carrito = (DataTable)Session["pedidoT"];
-            foreach (DataRow fila in dt.Rows)
-            {
-                DetallePedido pedido = new DetallePedido();
-                Producto prod = new Producto();
-                pedido.idDetalle = Convert.ToInt32(fila["idDetalle"]);
-                prod = ProductoLN.Obtener(Convert.ToInt32(fila["productos"]));
-                pedido.productos = prod;
-                if (pedido.productos.idProducto != d.productos.idProducto)
-                {
-                    pedido.cantidad = Convert.ToInt32(fila["cantidad"]);
-                    pedido.subTotal = Convert.ToDecimal(fila["subTotal"]);
-                    lista.Add(pedido);
-                }
-
-            }
-            dt.Clear();
-            dt.AcceptChanges();
-            foreach (DetallePedido detalle in lista)
-            {
-                if (detalle.productos.idProducto != d.productos.idProducto)
-                {
-                    DataRow fila1 = carrito.NewRow();
-                    fila1[0] = (int)detalle.idDetalle;
-                    fila1[1] = (int)detalle.productos.idProducto;
-                    fila1[2] = (int)detalle.cantidad;
-                    fila1[3] = (decimal)detalle.subTotal;
-                    carrito.Rows.Add(fila1);
-                }
-
-            }
-            Session["pedido"] = carrito;
-
-            CargarCarrito();
-        }
-
-
-        protected void txtCantidad_TextChanged(object sender, EventArgs e)
-        {
-            Total();
-
-
-
-        }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -165,12 +114,63 @@ namespace FerreteriaWeb
 
         }
 
-        protected void listaCarro_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+
+        protected void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            carrito = (DataTable)Session["pedido"];
+            //Obtener fila actual
+            GridViewRow currentRow = (GridViewRow)((TextBox)sender).Parent.Parent;
+            TextBox txtCantidad = (TextBox)currentRow.FindControl("txtCantidad");
+            if (txtCantidad.Text != "")
+            {
+
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+                int idDetalle = Convert.ToInt32(grvListaCarrito.DataKeys[currentRow.RowIndex].Values[0]);
+                //Actualizar cantidad en la sesión del carrito
+
+                DetallePedido d = ObtenerPedido().Find(x => x.idDetalle == idDetalle);
+                if (d.cantidad != cantidad)
+                {
+
+                    foreach (DataRow rows in carrito.Rows)
+                    {
+                        if (Convert.ToInt32(rows[1]) == d.productos.idProducto)
+                        {
+                            rows.BeginEdit();
+                            rows[2] = cantidad;
+                            rows[3] = d.productos.precio * cantidad;
+                            rows.EndEdit();
+
+
+                        }
+                        rows.AcceptChanges();
+                    }
+
+                    carrito.AcceptChanges();
+
+                    Session["pedido"] = carrito;
+                    grvListaCarrito.DataSource = ObtenerPedido();
+                    grvListaCarrito.DataBind();
+                }
+            }
         }
 
-      
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            GridViewRow currentRow = (GridViewRow)((Button)sender).Parent.Parent;
+
+
+            carrito = (DataTable)Session["pedido"];
+            carrito.Rows.RemoveAt(currentRow.RowIndex);
+            carrito.AcceptChanges();
+            Session["pedido"] = (DataTable)carrito;
+
+
+            grvListaCarrito.DataSource = ObtenerPedido();
+            grvListaCarrito.DataBind();
+        }
     }
+
 
 }

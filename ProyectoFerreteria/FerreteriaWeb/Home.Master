@@ -43,14 +43,14 @@
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav">
                             <li class="nav-item col-xl-3">
-                                <a class="nav-link m-3" href="#">
+                                <a class="nav-link m-3" href="RegistroCompra.aspx">
                                     <div class="col-xl-12">
                                         <asp:Label ID="lblCompra" runat="server" Text="Compras"></asp:Label>
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item col-xl-3">
-                                <a class="nav-link m-3" href="CuponCliente.aspx">
+                                <a class="nav-link m-3" href="Cupon.aspx">
                                     <div class="col-xl-12">
                                         <asp:Label ID="Label2" runat="server" Text="Cupones"></asp:Label>
                                     </div>

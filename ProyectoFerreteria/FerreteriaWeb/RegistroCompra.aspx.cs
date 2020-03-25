@@ -13,5 +13,10 @@ namespace FerreteriaWeb
         {
 
         }
+
+        protected void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

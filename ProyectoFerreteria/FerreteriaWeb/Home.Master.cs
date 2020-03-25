@@ -68,7 +68,16 @@ namespace FerreteriaWeb
 
         protected void LkBtnRegistrar_Click(object sender, EventArgs e)
         {
-
+            if (LkBtnIniciar.Text == "Cerrar sesión")
+            {
+                Session.RemoveAll();
+                Response.Redirect("InicioSesion.aspx");
+            }
+            else
+            {
+                LkBtnIniciar.Text = "Iniciar Sesión";
+                Response.Redirect("InicioSesion.aspx");
+            }
         }
     }
 }
