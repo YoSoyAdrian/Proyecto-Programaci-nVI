@@ -36,7 +36,7 @@ namespace FerreteriaLogica
         public static Producto Obtener(int idProducto)
         {
             List<Producto> lista = ProductoLN.ObtenerTodos();
-            Producto producto = lista.Where(x => x.idProducto == idProducto).FirstOrDefault();
+            Producto producto = lista.Where(x => x.idProducto == idProducto).First();
             return producto;
         }
         public static List<Producto> ObtenerXCategoria(int idCategoria)

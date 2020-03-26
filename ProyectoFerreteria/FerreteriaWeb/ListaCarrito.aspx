@@ -21,7 +21,7 @@
                         <asp:ImageField HeaderText="Producto" DataImageUrlFormatString="productos.imagen"></asp:ImageField>
                         <asp:TemplateField HeaderText="Nombre">
                             <ItemTemplate>
-                                <asp:Label runat="server" ID="lblNombre" CssClass="form-control-plaintext" Text='<%# Eval("productos.nombre") %>' AutoPostBack="true" ></asp:Label>
+                                <asp:Label runat="server" ID="lblNombre" CssClass="form-control-plaintext" Text='<%# Eval("productos.nombre") %>'></asp:Label>
                                 <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger btn-group-sm" Text="Eliminar" OnClick="btnEliminar_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -29,7 +29,7 @@
                         <asp:TemplateField HeaderText="SubTotal">
                             <ItemTemplate>
 
-                                <asp:Label runat="server" ID="lblSubTotal" CssClass="form-control-plaintext" Text='<%# Eval("subTotal") %>' AutoPostBack="true"></asp:Label>
+                                <asp:Label runat="server" ID="lblSubTotal" CssClass="form-control-plaintext" Text='<%# Eval("subTotal") %>'></asp:Label>
 
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -64,8 +64,13 @@
                 </div>
                 <div class="form-group">
                     <asp:Button ID="btnComprar" runat="server" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" Text="Comprar" />
+                    <asp:CheckBox ID="ChkCupon" runat="server" OnCheckedChanged="ChkCupon_CheckedChanged" AutoPostBack="true" CssClass="form-check-input ml-5" Text="Cupón de Descuento" />
                 </div>
-
+                <div class="form-group">
+                    <asp:Label ID="lblCupon" Visible="false" runat="server"  Text="Digite el código del Cupón: "></asp:Label>
+                    <asp:TextBox ID="txtCupon" Visible="false" AutoPostBack="true" TextMode="Number" CssClass="form-control-md" runat="server" ></asp:TextBox>
+                <asp:Button ID="btnCanjear" Visible="false" runat="server" OnClick="btnCanjear_Click" CssClass="btn btn-secondary" Text="Canjear" />
+                </div>
             </div>
 
         </div>

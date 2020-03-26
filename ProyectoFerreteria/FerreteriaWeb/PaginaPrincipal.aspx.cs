@@ -55,7 +55,7 @@ namespace FerreteriaWeb
             foreach (DataRow fila in dp.Rows)
             {
                 DetallePedido pedidoS = new DetallePedido();
-                Producto prod = new Producto();
+               
                 pedidoS.idDetalle = Convert.ToInt32(fila["idDetalle"]);
                 pedidoS.productos = ProductoLN.Obtener(Convert.ToInt32(fila["productos"]));
                 pedidoS.cantidad = Convert.ToInt32(fila["cantidad"]);
@@ -124,7 +124,7 @@ namespace FerreteriaWeb
 
         public void filtro()
         {
-            List<Producto> lista = new List<Producto>();
+            List<Producto> lista;
 
             if (rBtnJardin.Checked)
             {

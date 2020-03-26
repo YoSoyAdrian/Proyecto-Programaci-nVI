@@ -13,20 +13,23 @@ namespace FerreteriaWeb
 {
     public partial class ListaCarrito : System.Web.UI.Page
     {
+
         List<DetallePedido> lista;
         DataTable carrito = new DataTable();
+
         DataTable dtb;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CargarDetalle();
+            carrito = (DataTable)Session["pedido"];
             if (!IsPostBack)
             {
-                CargarDetalle();
+
                 grvListaCarrito.DataSource = ObtenerPedido();
                 grvListaCarrito.DataBind();
                 Total();
             }
-           
+
         }
 
 
@@ -53,8 +56,8 @@ namespace FerreteriaWeb
             lista = new List<DetallePedido>();
 
 
-            DataTable dt = (DataTable)Session["pedido"];
-            foreach (DataRow fila in dt.Rows)
+
+            foreach (DataRow fila in carrito.Rows)
             {
                 DetallePedido pedido = new DetallePedido();
                 Producto prod;
@@ -64,6 +67,7 @@ namespace FerreteriaWeb
                 pedido.productos.precio = prod.precio;
                 pedido.productos.cantidad = prod.cantidad;
                 pedido.productos.imagen = prod.imagen;
+                pedido.productos.nombre = prod.nombre;
                 pedido.cantidad = Convert.ToInt32(fila["cantidad"]);
                 pedido.subTotal = Convert.ToDecimal(fila["subTotal"]);
                 lista.Add(pedido);
@@ -93,21 +97,43 @@ namespace FerreteriaWeb
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-            Compra compra = new Compra();
-            compra.pedidos = ObtenerPedido();
-            DateTime fechaHoy = DateTime.Now;
-
             Cliente user = (Cliente)Session["Cliente"];
-            compra.cliente = user;
-            compra.fecha = fechaHoy;
+            if (user != null)
+            {
 
-            ClientScript.RegisterStartupScript(
-                this.GetType(),
-                "Compra",
-              "mensaje('Compra Productos','Compra registrada con éxito!','success')",
-                true
-                );
+
+                DateTime fechaHoy = DateTime.Now;
+
+                Pedido pedido = new Pedido();
+                foreach (DetallePedido detalle in ObtenerPedido())
+                {
+
+                    pedido.producto.idProducto = detalle.productos.idProducto;
+                    pedido.cantidad = detalle.cantidad;
+                    pedido.total = detalle.subTotal;
+                    pedido.cliente = user;
+                    PedidoLN.Nuevo(pedido);
+
+                    Compra compra = new Compra();
+                    compra.pedido = PedidoLN.Obtener(pedido.idPedido);
+                    compra.fecha = fechaHoy;
+                    CompraLN.Nuevo(compra);
+
+                }
+
+                ClientScript.RegisterStartupScript(
+                    this.GetType(),
+                    "Compra",
+                  "mensaje('Productos','Compra registrada con éxito!','success')",
+                    true
+                    );
+            }
+            else
+            {
+                Response.Redirect("InicioSesion.aspx");
+            }
         }
+
 
         protected void btnAgregar_Command(object sender, CommandEventArgs e)
         {
@@ -118,7 +144,7 @@ namespace FerreteriaWeb
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
-            carrito = (DataTable)Session["pedido"];
+
             //Obtener fila actual
             GridViewRow currentRow = (GridViewRow)((TextBox)sender).Parent.Parent;
             TextBox txtCantidad = (TextBox)currentRow.FindControl("txtCantidad");
@@ -147,11 +173,12 @@ namespace FerreteriaWeb
                         rows.AcceptChanges();
                     }
 
-                    carrito.AcceptChanges();
 
-                    Session["pedido"] = carrito;
+
+                    Total();
                     grvListaCarrito.DataSource = ObtenerPedido();
                     grvListaCarrito.DataBind();
+
                 }
             }
         }
@@ -161,14 +188,35 @@ namespace FerreteriaWeb
             GridViewRow currentRow = (GridViewRow)((Button)sender).Parent.Parent;
 
 
-            carrito = (DataTable)Session["pedido"];
+
             carrito.Rows.RemoveAt(currentRow.RowIndex);
             carrito.AcceptChanges();
             Session["pedido"] = (DataTable)carrito;
-
-
+            dtb = (DataTable)Session["pedido"];
+            Total();
             grvListaCarrito.DataSource = ObtenerPedido();
             grvListaCarrito.DataBind();
+        }
+
+        protected void ChkCupon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ChkCupon.Checked)
+            {
+                lblCupon.Visible = true;
+                txtCupon.Visible = true;
+                btnCanjear.Visible = true;
+            }
+            else
+            {
+                lblCupon.Visible = false;
+                txtCupon.Visible = false;
+                btnCanjear.Visible = false;
+            }
+        }
+
+        protected void btnCanjear_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

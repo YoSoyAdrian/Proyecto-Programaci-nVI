@@ -45,6 +45,7 @@
     <Compile Include="CategoriaLN.cs" />
     <Compile Include="ClienteLN.cs" />
     <Compile Include="CuponLN.cs" />
+    <Compile Include="CompraLN.cs" />
     <Compile Include="PedidoLN.cs" />
     <Compile Include="ProductoLN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

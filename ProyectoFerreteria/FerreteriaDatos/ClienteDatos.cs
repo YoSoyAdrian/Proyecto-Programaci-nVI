@@ -18,6 +18,14 @@ namespace FerreteriaDatos
             DataSet ds = db.ExecuteReader(comando, "UsuarioCliente");
             return ds;
         }
+        public static DataSet SeleccionarRegistro()
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ListarRegistro");
+            comando.CommandType = CommandType.StoredProcedure;
+            DataSet ds = db.ExecuteReader(comando, "RegistroCompra");
+            return ds;
+        }
 
     }
 }
