@@ -36,7 +36,9 @@ namespace FerreteriaWeb
             {
                 dtb = new DataTable("Carrito");
                 dtb.Columns.Add("idDetalle", System.Type.GetType("System.Int32"));
-                dtb.Columns.Add("productos", System.Type.GetType("System.Int32"));
+                dtb.Columns.Add("idProducto", System.Type.GetType("System.Int32"));
+                dtb.Columns.Add("nombre");
+                dtb.Columns.Add("precio");
                 dtb.Columns.Add("cantidad");
                 dtb.Columns.Add("subTotal");
                 Session["pedido"] = dtb;
@@ -57,7 +59,9 @@ namespace FerreteriaWeb
                 DetallePedido pedidoS = new DetallePedido();
                
                 pedidoS.idDetalle = Convert.ToInt32(fila["idDetalle"]);
-                pedidoS.productos = ProductoLN.Obtener(Convert.ToInt32(fila["productos"]));
+                pedidoS.productos.idProducto = Convert.ToInt32(fila["idProducto"]);
+                pedidoS.productos.nombre = fila["nombre"].ToString();
+                pedidoS.productos.precio= Convert.ToDecimal(fila["precio"]);
                 pedidoS.cantidad = Convert.ToInt32(fila["cantidad"]);
                 pedidoS.subTotal = Convert.ToDecimal(fila["subTotal"]);
                 detalle.Add(pedidoS);
@@ -76,9 +80,11 @@ namespace FerreteriaWeb
                 DataTable dt = (DataTable)Session["pedido"];//*
                 carrito = (DataTable)Session["pedido"];
                 pedido.idDetalle = nPedido++;
-                pedido.productos = producto;
+                pedido.productos.idProducto = producto.idProducto;
+                pedido.productos.precio = producto.precio;
+                pedido.productos.nombre = producto.nombre;
                 pedido.cantidad = 1;
-                pedido.subTotal = producto.precio * pedido.cantidad;
+                pedido.subTotal = pedido.productos.precio * pedido.cantidad;
 
 
                 if (obtenerPedido().Exists(x => x.productos.idProducto == id))
@@ -95,8 +101,8 @@ namespace FerreteriaWeb
                             if (Convert.ToInt32(row[1]) == id)
                             {
                                 row.BeginEdit();
-                                row[2] = d.cantidad = 1+ Convert.ToInt32(row[2]);
-                                row[3] = d.subTotal = d.productos.precio * d.cantidad;
+                                row[4] = d.cantidad = 1+ Convert.ToInt32(row[4]);
+                                row[5] = d.subTotal = d.productos.precio * d.cantidad;
                             }
                         }
                         carrito.AcceptChanges();
@@ -108,8 +114,10 @@ namespace FerreteriaWeb
                     DataRow fila = carrito.NewRow();
                     fila[0] = (int)pedido.idDetalle;
                     fila[1] = (int)pedido.productos.idProducto;
-                    fila[2] = (int)pedido.cantidad;
-                    fila[3] = (decimal)pedido.subTotal;
+                    fila[2] = (String)pedido.productos.nombre;
+                    fila[3] = (decimal)pedido.productos.precio;
+                    fila[4] = (int)pedido.cantidad;
+                    fila[5] = (decimal)pedido.subTotal;
                     carrito.Rows.Add(fila);
                     Session["pedido"] = carrito;
 

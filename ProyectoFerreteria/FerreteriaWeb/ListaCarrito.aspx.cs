@@ -39,7 +39,9 @@ namespace FerreteriaWeb
             {
                 dtb = new DataTable("Carrito");
                 dtb.Columns.Add("idDetalle", System.Type.GetType("System.Int32"));
-                dtb.Columns.Add("productos", System.Type.GetType("System.Int32"));
+                dtb.Columns.Add("idProducto", System.Type.GetType("System.Int32"));
+                dtb.Columns.Add("nombre");
+                dtb.Columns.Add("precio");
                 dtb.Columns.Add("cantidad");
                 dtb.Columns.Add("subTotal");
                 Session["pedido"] = dtb;
@@ -56,18 +58,15 @@ namespace FerreteriaWeb
             lista = new List<DetallePedido>();
 
 
-
             foreach (DataRow fila in carrito.Rows)
             {
                 DetallePedido pedido = new DetallePedido();
-                Producto prod;
+
                 pedido.idDetalle = Convert.ToInt32(fila["idDetalle"]);
-                prod = ProductoLN.Obtener(Convert.ToInt32(fila["productos"]));
-                pedido.productos.idProducto = prod.idProducto;
-                pedido.productos.precio = prod.precio;
-                pedido.productos.cantidad = prod.cantidad;
-                pedido.productos.imagen = prod.imagen;
-                pedido.productos.nombre = prod.nombre;
+
+                pedido.productos.idProducto = Convert.ToInt32(fila["idProducto"]);
+                pedido.productos.nombre = fila["nombre"].ToString();
+                pedido.productos.precio = Convert.ToDecimal(fila["precio"]);
                 pedido.cantidad = Convert.ToInt32(fila["cantidad"]);
                 pedido.subTotal = Convert.ToDecimal(fila["subTotal"]);
                 lista.Add(pedido);
@@ -164,8 +163,8 @@ namespace FerreteriaWeb
                         if (Convert.ToInt32(rows[1]) == d.productos.idProducto)
                         {
                             rows.BeginEdit();
-                            rows[2] = cantidad;
-                            rows[3] = d.productos.precio * cantidad;
+                            rows[4] = cantidad;
+                            rows[5] = d.productos.precio * cantidad;
                             rows.EndEdit();
 
 
