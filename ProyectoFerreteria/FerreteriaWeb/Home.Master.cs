@@ -18,6 +18,7 @@ namespace FerreteriaWeb
                 int id = ((Cliente)Session["Cliente"]).idCliente;
                 Cliente usuario = ClienteLN.Obtener(id);
                 Rango rango = RangoLN.Obtener(usuario.rango.idRango);
+
                 lblCliente.Text = usuario.nombre;
                 LkBtnIniciar.Text = "Cerrar sesión";
                 LkBtnRegistrar.Text = "Cambiar contraseña";
@@ -42,6 +43,9 @@ namespace FerreteriaWeb
                     break;
                 case 4:
                     imgRango.ImageUrl = "../Img/UserVip.png";
+                    break;
+                case 5:
+                    imgRango.ImageUrl = "../Img/new.png";
                     break;
             }
         }

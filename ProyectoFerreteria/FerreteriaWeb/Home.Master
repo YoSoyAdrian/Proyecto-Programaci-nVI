@@ -63,7 +63,7 @@
                                         <asp:Image ID="imgRango" runat="server" ImageUrl="~/Img/cupon.png" />
                                     </div>
                                     <div class="col-xl-12">
-                                        <asp:Label ID="lblRango" CssClass="text-white" runat="server" Text="Rango"></asp:Label>
+                                        <asp:Label ID="lblRango" CssClass="text-white" runat="server" Text="Nivel"></asp:Label>
                                     </div>
 
                                 </a>

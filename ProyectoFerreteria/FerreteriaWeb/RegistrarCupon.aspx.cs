@@ -14,12 +14,14 @@ namespace FerreteriaWeb
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            btnRegistrar_Click(null, null);
             if (!IsPostBack)
             {
-
                 ActualizarRango();
                 ActualizarProducto();
             }
+
+
             ddlRango.SelectedIndex = -1;
             ddlProducto.SelectedIndex = -1;
             rdbDescuento.Checked = false;
@@ -64,60 +66,42 @@ namespace FerreteriaWeb
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-            try
+
+            if (ddlProducto.SelectedIndex != -1 && ddlRango.SelectedIndex != -1)
             {
-                if (ddlProducto.SelectedIndex != -1 && ddlRango.SelectedIndex != -1)
+
+                Cupon cupon = new Cupon()
                 {
-
-                    Cupon cupon = new Cupon()
-                    {
-                        idCupon = Random(),
-                        nombre = txtNombre.Text,
-                        descripcion = txtDescripcion.Text,
-                        cantidad = Convert.ToInt32(txtCantidad.Text),
-                    };
-                    cupon.producto.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
-                    cupon.rango.idRango = Convert.ToInt32(ddlRango.SelectedValue);
-                    CuponLN.Nuevo(cupon);
+                    idCupon = Random(),
+                    nombre = txtNombre.Text,
+                    descripcion = txtDescripcion.Text,
+                    cantidad = Convert.ToInt32(txtCantidad.Text),
+                };
+                cupon.producto.idProducto = Convert.ToInt32(ddlProducto.SelectedValue);
+                cupon.rango.idRango = Convert.ToInt32(ddlRango.SelectedValue);
+                CuponLN.Nuevo(cupon);
 
 
-                    ClientScript.RegisterStartupScript(this.GetType(), "Carrito",
-          "mensajeConfirm('Agregado correctamente')", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Carrito",
+      "mensajeConfirm('Agregado correctamente')", true);
 
-                    txtCantidad.Text = "";
-                    txtDescripcion.Text = "";
-                    txtNombre.Text = "";
-                }
-            }
-            catch (Exception)
-            {
 
-                throw;
+                txtCantidad.Text = "";
+                txtDescripcion.Text = "";
+                txtNombre.Text = "";
             }
 
         }
 
-        protected void ddlProducto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         public List<Cupon> listaCupon_GetData()
         {
             return CuponLN.ObtenerTodos();
         }
 
 
-        protected void listaCupon_ItemCreated(object sender, ListViewItemEventArgs e)
-        {
 
-        }
 
-        protected void btnRegistrar_Command(object sender, CommandEventArgs e)
-        {
-        
-        }
-
-        public List<Cupon>grvCupon_GetData()
+        public List<Cupon> grvCupon_GetData()
         {
             return CuponLN.ObtenerTodos();
         }

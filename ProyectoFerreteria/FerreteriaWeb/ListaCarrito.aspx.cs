@@ -16,15 +16,15 @@ namespace FerreteriaWeb
 
         List<DetallePedido> lista;
         DataTable carrito = new DataTable();
-
+        private static int codigo = 0;
         DataTable dtb;
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarDetalle();
+
             carrito = (DataTable)Session["pedido"];
             if (!IsPostBack)
             {
-
+                CargarDetalle();
                 grvListaCarrito.DataSource = ObtenerPedido();
                 grvListaCarrito.DataBind();
                 Total();
@@ -102,30 +102,48 @@ namespace FerreteriaWeb
 
 
                 DateTime fechaHoy = DateTime.Now;
-
-                Pedido pedido = new Pedido();
-                foreach (DetallePedido detalle in ObtenerPedido())
+                if (codigo == 0)
                 {
 
-                    pedido.producto.idProducto = detalle.productos.idProducto;
-                    pedido.cantidad = detalle.cantidad;
-                    pedido.total = detalle.subTotal;
-                    pedido.cliente = user;
-                    PedidoLN.Nuevo(pedido);
-
-                    Compra compra = new Compra();
-                    compra.pedido = PedidoLN.Obtener(pedido.idPedido);
-                    compra.fecha = fechaHoy;
+                    Compra compra = new Compra()
+                    {
+                        fecha = fechaHoy
+                    };
                     CompraLN.Nuevo(compra);
-
                 }
 
+
+                foreach (var item in CompraLN.ObtenerTodos())
+                {
+
+                    codigo = item.idCompra;
+                }
+
+                foreach (DetallePedido detalle in ObtenerPedido())
+                {
+                    Pedido pedido = new Pedido();
+                    pedido.producto = detalle.productos;
+                    pedido.codigo = codigo;
+                    pedido.cantidad = detalle.cantidad;
+                    pedido.total = detalle.subTotal;
+
+                    pedido.cliente = ClienteLN.Obtener(user.idCliente);
+                    PedidoLN.Nuevo(pedido);
+
+                }
+                decimal total = PedidoLN.ObtenerTotalXCliente(user.idCliente);
+                Rango rango = RangoLN.ObtenerXRango(total);
+                ClienteLN.Actualizar(user.idCliente, rango.idRango);
+
+                codigo = 0;
+                carrito.Clear();
                 ClientScript.RegisterStartupScript(
                     this.GetType(),
                     "Compra",
-                  "mensaje('Productos','Compra registrada con éxito!','success')",
+                  "mensajeRedirect('Productos','Compra registrada con éxito!','success','PaginaPrincipal.aspx')",
                     true
                     );
+
             }
             else
             {
@@ -215,7 +233,11 @@ namespace FerreteriaWeb
 
         protected void btnCanjear_Click(object sender, EventArgs e)
         {
+            if (txtCupon.Text != "")
+            {
+                int idCupon = Convert.ToInt32(txtCupon.Text);
 
+            }
         }
     }
 

@@ -112,7 +112,9 @@
     <Content Include="Img\eyenClose.png" />
     <Content Include="Img\eyeOpen.png" />
     <Content Include="Img\Fondo.jpg" />
+    <Content Include="Img\listaCompra.png" />
     <Content Include="Img\logo.png" />
+    <Content Include="Img\new.png" />
     <Content Include="Img\supermarket.png" />
     <Content Include="Img\UserBronce.png" />
     <Content Include="Img\userGold.png" />
@@ -158,7 +160,6 @@
     <Content Include="Scripts\sweetalert2.all.min.js" />
     <Content Include="Scripts\sweetalert2.js" />
     <Content Include="Scripts\sweetalert2.min.js" />
-    <Content Include="Scripts\WebForms\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />

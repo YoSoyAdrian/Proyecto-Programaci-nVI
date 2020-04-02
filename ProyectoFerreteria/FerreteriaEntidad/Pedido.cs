@@ -13,7 +13,7 @@ namespace FerreteriaEntidad
         public Cliente cliente { get; set; }
         public int cantidad { get; set; }
         public decimal total { get; set; }
-
+        public int codigo { get; set; }
         public Pedido()
         {
             this.cliente = new Cliente();

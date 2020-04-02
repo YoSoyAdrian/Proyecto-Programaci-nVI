@@ -32,7 +32,23 @@ namespace FerreteriaLogica
         public static Rango Obtener(int idRango)
         {
             List<Rango> lista = RangoLN.ObtenerTodos();
-            Rango rango = lista.Where(x => x.idRango == idRango).FirstOrDefault();
+            Rango rango=new Rango();
+            rango= lista.Where(x => x.idRango == idRango).FirstOrDefault();
+            return rango;
+        }
+        public static Rango ObtenerXRango(decimal total)
+        {
+            List<Rango> lista = RangoLN.ObtenerTodos();
+            Rango rango = new Rango();
+            if (total <= 100000)
+            {
+                rango = lista.Find(x => x.montoMinimo <= total && x.montoMaximo >= total);
+            }
+            else
+            {
+                rango = lista.Find(x => x.montoMaximo == 1);
+            }
+           
             return rango;
         }
         public static void Nuevo(Rango rango)

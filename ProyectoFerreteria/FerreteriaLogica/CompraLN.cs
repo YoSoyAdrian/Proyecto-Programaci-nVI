@@ -20,9 +20,20 @@ namespace FerreteriaLogica
             {
                 Compra registro = new Compra();
                 registro.idCompra = Convert.ToInt32(fila["idPedidoCliente"]);
-                registro.pedido.idPedido = Convert.ToInt32(fila["idPedido"]);
-              
-                registro.total = Convert.ToDecimal(fila["total"]);
+                registro.fecha = Convert.ToDateTime(fila["fecha"]);
+                lista.Add(registro);
+            }
+            return lista;
+        }
+        public static List<Compra> ObtenerCompras()
+        {
+            List<Compra> lista = new List<Compra>();
+            DataSet ds = CompraDatos.SeleccionarRegistro();
+
+            foreach (DataRow fila in ds.Tables[0].Rows)
+            {
+                Compra registro = new Compra();
+                registro.idCompra = Convert.ToInt32(fila["idPedidoCliente"]);
                 registro.fecha = Convert.ToDateTime(fila["fecha"]);
                 lista.Add(registro);
             }
@@ -34,16 +45,6 @@ namespace FerreteriaLogica
             Compra compra = lista.Where(x => x.idCompra == idCompra).FirstOrDefault();
             return compra;
         }
-        ////public static List<Pedido> ObtenerXProducto(int idProducto)
-        ////{
-        ////    List<Pedido> lista = CompraLN.ObtenerTodos();
-
-        ////    List<Pedido> pedido = new List<Pedido>();
-        ////    pedido = lista.Where(x => x.idProducto == idProducto).ToList();
-        ////    return pedido;
-
-
-        ////}
         public static void Nuevo(Compra compra)
         {
 

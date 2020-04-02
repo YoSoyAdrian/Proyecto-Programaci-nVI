@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-sm-10 col-xl-10 form-group">
                         <%-- Rangos--%>
-                        <asp:DropDownList ID="ddlRango" DataTextField="nombre" DataValueField="idRango" ValidationGroup="Registrar" OnSelectedIndexChanged="ddlRango_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlRango" DataTextField="nombre" DataValueField="idRango" ValidationGroup="Registrar"  CssClass="form-control" runat="server"></asp:DropDownList>
                     </div>
                     <div class="col-xl-2 form-group">
                         <asp:Label ID="Label4" runat="server" CssClass="col-sm-2 col-form-label" Text="Producto"></asp:Label>
@@ -62,7 +62,7 @@
 
                     <div class="col-sm-10 col-xl-10 form-group">
                         <%-- Productos--%>
-                        <asp:DropDownList ID="ddlProducto" DataTextField="nombre" ValidationGroup="Registrar" DataValueField="idProducto" OnSelectedIndexChanged="ddlProducto_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlProducto" DataTextField="nombre" ValidationGroup="Registrar" DataValueField="idProducto" CssClass="form-control" runat="server"></asp:DropDownList>
 
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="form-group text-center">
-                    <asp:Button ID="btnRegistrar" OnClick="btnRegistrar_Click" ValidationGroup="Registrar" OnCommand="btnRegistrar_Command" CssClass="btn btn-primary" runat="server" Text="Registrar" />
+                    <asp:Button ID="btnRegistrar" OnClick="btnRegistrar_Click" CssClass="btn btn-primary"  runat="server" Text="Registrar" />
                 </div>
             </fieldset>
         </div>

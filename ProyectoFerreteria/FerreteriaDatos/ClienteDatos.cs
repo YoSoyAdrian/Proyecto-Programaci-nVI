@@ -10,6 +10,16 @@ namespace FerreteriaDatos
 {
    public class ClienteDatos
     {
+        public static void ActualizarRangoCliente( int idCliente,int idRango)
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ActualizarRangoCliente");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@idCliente", idCliente);
+            comando.Parameters.AddWithValue("@idRango", idRango);
+
+            db.ExecuteNonQuery(comando);
+        }
         public static DataSet SeleccionarTodos()
         {
             Database db = DatabaseFactory.CreateDatabase("Default");

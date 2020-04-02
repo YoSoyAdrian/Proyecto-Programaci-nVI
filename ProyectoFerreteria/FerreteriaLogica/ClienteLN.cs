@@ -50,5 +50,17 @@ namespace FerreteriaLogica
             cliente= lista.Find(elemento => elemento.idCliente == idCliente);
             return cliente;
         }
+        public static Cliente ObtenerXRango(int idRango)
+        {
+            List<Cliente> lista = ClienteLN.ObtenerTodos();
+            Cliente cliente = new Cliente();
+            cliente = lista.Find(elemento => elemento.rango.idRango == idRango);
+            return cliente;
+        }
+        public static void Actualizar(int idCliente, int idRango)
+        {
+
+            ClienteDatos.ActualizarRangoCliente(idCliente,idRango);
+        }
     }
 }

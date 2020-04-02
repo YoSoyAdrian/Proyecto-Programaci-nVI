@@ -26,6 +26,17 @@ namespace FerreteriaWeb
             if (userVerificado != null)
             {
                 Session["Cliente"] = (Cliente)userVerificado;
+                decimal total = PedidoLN.ObtenerTotalXCliente(userVerificado.idCliente);
+                if (total != 0)
+                {
+                    Rango rango = RangoLN.ObtenerXRango(total);
+                    ClienteLN.Actualizar(userVerificado.idCliente, rango.idRango);
+                }
+                else
+                {
+                    ClienteLN.Actualizar(userVerificado.idCliente, 5);
+                }
+
                 ClientScript.RegisterStartupScript(this.GetType(), "Inicio de Sesión",
      "mensajeRedirect('Inicio de Sesión','Credenciales correctas','success','PaginaPrincipal.aspx')", true);
             }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FerreteriaDatos
 {
-   public class PedidoDatos
+    public class PedidoDatos
     {
         public static DataSet SeleccionarTodos()
         {
@@ -29,8 +29,25 @@ namespace FerreteriaDatos
             comando.Parameters.AddWithValue("@idCliente", pedido.cliente.idCliente);
             comando.Parameters.AddWithValue("@cantidad", pedido.cantidad);
             comando.Parameters.AddWithValue("@total", pedido.total);
+            comando.Parameters.AddWithValue("@codigo", pedido.codigo);
 
             db.ExecuteNonQuery(comando);
+        }
+        public static DataSet SeleccionarRegistro()
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ListarRegistroCompra");
+            comando.CommandType = CommandType.StoredProcedure;
+            DataSet ds = db.ExecuteReader(comando, "Pedido");
+            return ds;
+        }
+        public static DataSet SeleccionarTotalCompras()
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ListarTotalCompra");
+            comando.CommandType = CommandType.StoredProcedure;
+            DataSet ds = db.ExecuteReader(comando, "Pedido");
+            return ds;
         }
     }
 }

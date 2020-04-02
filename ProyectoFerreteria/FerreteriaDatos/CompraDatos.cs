@@ -19,9 +19,8 @@ namespace FerreteriaDatos
             Database db = DatabaseFactory.CreateDatabase("Default");
             SqlCommand comando = new SqlCommand("PA_InsertarPedidoCliente");
             comando.CommandType = CommandType.StoredProcedure;
-            comando.Parameters.AddWithValue("@idPedido", compra.pedido.idPedido);
-            comando.Parameters.AddWithValue("@total", compra.total);
             comando.Parameters.AddWithValue("@fecha", compra.fecha);
+
 
             db.ExecuteNonQuery(comando);
         }
@@ -32,6 +31,14 @@ namespace FerreteriaDatos
             SqlCommand comando = new SqlCommand("PA_ListarPedidoCliente");
             comando.CommandType = CommandType.StoredProcedure;
             DataSet ds = db.ExecuteReader(comando, "PedidoCliente");
+            return ds;
+        }
+        public static DataSet SeleccionarRegistro()
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ListarRegistroCompra");
+            comando.CommandType = CommandType.StoredProcedure;
+            DataSet ds = db.ExecuteReader(comando, "Pedido");
             return ds;
         }
     }
