@@ -14,18 +14,13 @@ namespace FerreteriaWeb
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            btnRegistrar_Click(null, null);
+
             if (!IsPostBack)
             {
                 ActualizarRango();
                 ActualizarProducto();
             }
 
-
-            ddlRango.SelectedIndex = -1;
-            ddlProducto.SelectedIndex = -1;
-            rdbDescuento.Checked = false;
-            rdbRegalia.Checked = false;
 
         }
         public void ActualizarRango()
@@ -66,10 +61,8 @@ namespace FerreteriaWeb
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-
-            if (ddlProducto.SelectedIndex != -1 && ddlRango.SelectedIndex != -1)
+            if (txtCantidad.Text != "" && txtDescripcion.Text != "" && txtNombre.Text != "")
             {
-
                 Cupon cupon = new Cupon()
                 {
                     idCupon = Random(),
@@ -89,17 +82,9 @@ namespace FerreteriaWeb
                 txtCantidad.Text = "";
                 txtDescripcion.Text = "";
                 txtNombre.Text = "";
+                grvCupon.DataBind();
             }
-
         }
-
-        public List<Cupon> listaCupon_GetData()
-        {
-            return CuponLN.ObtenerTodos();
-        }
-
-
-
 
         public List<Cupon> grvCupon_GetData()
         {

@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="InicioSesion.aspx.cs" Inherits="FerreteriaWeb.InicioSesion" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
     <script src="Scripts/sweetalert2.min.js"></script>
     <script src="Scripts/mensaje.js"></script>
     <link href="Content/sweetalert2.min.css" rel="stylesheet" />
@@ -10,12 +12,12 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        body {
+        /*body {
             height: 100%;
             background-image: url("/Img/Fondo.jpg");
             background-size: cover;
             background-attachment: fixed;
-        }
+        }*/
     </style>
 
     <div class="row p-xl-5 justify-content-center">
@@ -51,7 +53,7 @@
 
             </div>
             <div class="form-group">
-                <asp:LinkButton ID="lkBtnCrearCuenta" Text="Crear Cuenta" runat="server"></asp:LinkButton>
+                <asp:LinkButton ID="lkBtnCrearCuenta" Text="Crear Cuenta" runat="server" ></asp:LinkButton>
             </div>
         </div>
     </div>

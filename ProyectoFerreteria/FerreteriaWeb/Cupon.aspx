@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="Cupon.aspx.cs" Inherits="FerreteriaWeb.MantCuponCliente" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+ 
+
     <div class="row form-group">
         <div class="col-xl-12 form-group">
             <div class="container text-center pt-3 border-bottom border-danger">

@@ -57,11 +57,11 @@ namespace FerreteriaWeb
             foreach (DataRow fila in dp.Rows)
             {
                 DetallePedido pedidoS = new DetallePedido();
-               
+
                 pedidoS.idDetalle = Convert.ToInt32(fila["idDetalle"]);
                 pedidoS.productos.idProducto = Convert.ToInt32(fila["idProducto"]);
                 pedidoS.productos.nombre = fila["nombre"].ToString();
-                pedidoS.productos.precio= Convert.ToDecimal(fila["precio"]);
+                pedidoS.productos.precio = Convert.ToDecimal(fila["precio"]);
                 pedidoS.cantidad = Convert.ToInt32(fila["cantidad"]);
                 pedidoS.subTotal = Convert.ToDecimal(fila["subTotal"]);
                 detalle.Add(pedidoS);
@@ -74,7 +74,7 @@ namespace FerreteriaWeb
         {
             if (e.CommandName == "Seleccionar")
             {
-                
+
                 int id = int.Parse(e.CommandArgument.ToString());
                 Producto producto = ProductoLN.Obtener(id);
                 DataTable dt = (DataTable)Session["pedido"];//*
@@ -91,17 +91,17 @@ namespace FerreteriaWeb
                 {
 
                     DetallePedido d = obtenerPedido().Find(x => x.productos.idProducto == id);
-                    if ( d != null)
+                    if (d != null)
                     {
 
-                      
-                        
+
+
                         foreach (DataRow row in carrito.Rows)
                         {
                             if (Convert.ToInt32(row[1]) == id)
                             {
                                 row.BeginEdit();
-                                row[4] = d.cantidad = 1+ Convert.ToInt32(row[4]);
+                                row[4] = d.cantidad = 1 + Convert.ToInt32(row[4]);
                                 row[5] = d.subTotal = d.productos.precio * d.cantidad;
                             }
                         }
@@ -185,7 +185,7 @@ namespace FerreteriaWeb
             return ProductoLN.ObtenerTodos();
         }
 
-      
+
     }
 
 }

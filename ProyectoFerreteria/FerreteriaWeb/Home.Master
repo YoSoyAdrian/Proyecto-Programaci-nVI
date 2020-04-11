@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="FerreteriaWeb.Home" ClientIDMode="Static"  %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Home.master.cs" Inherits="FerreteriaWeb.Home" ClientIDMode="Static" %>
 
 <!DOCTYPE html>
 
@@ -8,14 +8,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ferretería Digital</title>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="Content/estilo.css" rel="stylesheet" />
-    <script src='<%=ResolveClientUrl("~/Scripts/sweetalert2.min.js")%>'></script>
-    <script src='<%=ResolveClientUrl("~/Scripts/mensaje.js")%>'></script>
-    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
-       
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/estilo.css" rel="stylesheet" />
+     <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+
+
+
     <style>
         .row {
             margin-right: 0;
@@ -29,7 +28,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <%-- Menú de Navegación --%>
-        <div class="row">
+        <div class="row mr-0" >
             <div class="col-xl-12 p-0">
                 <nav class="navbar navbar-expand-xl bg-dark navbar-dark">
                     <a class="navbar-brand col-xl-3 col-sm-6" href="PaginaPrincipal.aspx">
@@ -159,9 +158,12 @@
 
         </div>
     </form>
-    <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/WebForms/main.js")%>'></script>
+
     <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/jquery-3.4.1.js")%>'></script>
     <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/bootstrap.min.js")%>'></script>
+    <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/Scripts.js")%>'></script>
+    <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/sweetalert2.min.js")%>'></script>
+    <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/mensaje.js")%>'></script>
 </body>
 
 </html>

@@ -31,5 +31,9 @@ namespace FerreteriaEntidad
             this.rango = new Rango();
         }
 
+        public override string ToString()
+        {
+            return nombre;
+        }
     }
 }

@@ -34,8 +34,9 @@ namespace FerreteriaDatos
                 {
                     throw new Exception("No se pudo abrir la Base de Datos, revise los parámetros de conexión! ");
                 }
-
+               
                 return db;
+                
             }
             catch (Exception ex)
             {
@@ -45,7 +46,7 @@ namespace FerreteriaDatos
                 throw ex;
 
             }
-
+           
         }
 
         public static Database CreateDatabase(string nombre, String usuario, String contrasena)

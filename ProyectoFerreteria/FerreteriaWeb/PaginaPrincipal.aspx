@@ -2,9 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <link href="Content/estilo.css" rel="stylesheet" />
-
-
+<script src="Scripts/sweetalert2.min.js"></script>
+    <script src="Scripts/mensaje.js"></script>
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+   
     <div class="row form-group mt-xl-5">
         <div class="col-xl-2 col-sm-12 mt-xl-5">
             <div class="text-center">

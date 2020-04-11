@@ -114,12 +114,12 @@
             <div class="col-xl-6">
             <h2>Cupones</h2>
         </div>
-            <asp:GridView ID="grvCupon" runat="server" CssClass="table table-active" AutoGenerateColumns="False" DataKeyNames="idCupon" SelectMethod="grvCupon_GetData" >
+            <asp:GridView ID="grvCupon" runat="server" CssClass="table table-bordered" AutoGenerateColumns="False" DataKeyNames="idCupon" SelectMethod="grvCupon_GetData" >
 
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="nombre"></asp:BoundField>
-                    <asp:BoundField HeaderText="C&#243;digo" DataField="idCupon"></asp:BoundField>
-                    <asp:BoundField DataField="cantidad" HeaderText="Cantidad"></asp:BoundField>
+                    <asp:BoundField HeaderText="Producto" DataField="producto.nombre"></asp:BoundField>
+                    <asp:BoundField DataField="rango.nombre" HeaderText="Nivel"></asp:BoundField>
                     <asp:CommandField ShowSelectButton="True" HeaderText="Asignar Cliente" ButtonType="Link" ></asp:CommandField>
                 </Columns>
             </asp:GridView>

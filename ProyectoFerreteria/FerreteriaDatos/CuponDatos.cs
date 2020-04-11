@@ -33,7 +33,28 @@ namespace FerreteriaDatos
 
             db.ExecuteNonQuery(comando);
         }
-       
+        public static void ActualizarCupon(bool estado, int id)
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ActualizarEstadoCupon");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@idCupon", id);
+            comando.Parameters.AddWithValue("@estado",estado);
+           
+
+            db.ExecuteNonQuery(comando);
+        }
+        public static void ActualizarCuponCliente(bool estado, int id)
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ActualizarEstadoCuponCliente");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@idCupon", id);
+            comando.Parameters.AddWithValue("@estado", estado);
+
+
+            db.ExecuteNonQuery(comando);
+        }
         public static void InsertarCliente(Cupon cupon)
         {
             Database db = DatabaseFactory.CreateDatabase("Default");
@@ -52,6 +73,13 @@ namespace FerreteriaDatos
             DataSet ds = db.ExecuteReader(comando, "CuponCliente");
             return ds;
         }
-
+        public static DataSet SeleccionarXRango()
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ListarCuponRango");
+            comando.CommandType = CommandType.StoredProcedure;
+            DataSet ds = db.ExecuteReader(comando, "Cupon");
+            return ds;
+        }
     }
 }

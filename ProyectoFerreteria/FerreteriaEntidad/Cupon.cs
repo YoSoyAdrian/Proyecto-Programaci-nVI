@@ -8,6 +8,7 @@ namespace FerreteriaEntidad
 {
     public class Cupon
     {
+        public int idCuponCliente { get; set; }
         public int idCupon { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }

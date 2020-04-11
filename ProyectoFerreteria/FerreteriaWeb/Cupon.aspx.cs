@@ -12,7 +12,7 @@ namespace FerreteriaWeb
     public partial class MantCuponCliente : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+          {
             if (!IsPostBack)
             {
                 ddlRango.DataSource = RangoLN.ObtenerTodos();

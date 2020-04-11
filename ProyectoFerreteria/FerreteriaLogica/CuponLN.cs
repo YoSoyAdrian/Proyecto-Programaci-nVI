@@ -23,9 +23,12 @@ namespace FerreteriaLogica
                 registro.nombre = fila["nombre"].ToString();
                 registro.descripcion = fila["descripcion"].ToString();
                 registro.cantidad = Convert.ToInt32(fila["cantidad"]);
-                registro.producto.idProducto = Convert.ToInt32(fila["producto"]);
-                registro.rango.idRango = Convert.ToInt32(fila["rango"]);
-
+                registro.producto.idProducto = Convert.ToInt32(fila["idProducto"]);
+                registro.producto.nombre = fila["nombreProducto"].ToString();
+                registro.rango.idRango = Convert.ToInt32(fila["idRango"]);
+                registro.rango.nombre = fila["nombreRango"].ToString();
+                registro.estado = Convert.ToBoolean(fila["estado"]);
+                
                 lista.Add(registro);
             }
             return lista;
@@ -38,10 +41,31 @@ namespace FerreteriaLogica
             foreach (DataRow fila in ds.Tables[0].Rows)
             {
                 Cupon registro = new Cupon();
-                registro.idCupon = Convert.ToInt32(fila["idCupon"]);
+                registro.idCuponCliente = Convert.ToInt32(fila["idCuponCliente"]);
                 registro.cliente.idCliente = Convert.ToInt32(fila["idCliente"]);
+                registro.cliente.nombre = fila["nombreCliente"].ToString();
+                registro.nombre = fila["nombreCupon"].ToString();
+                registro.producto.nombre = fila["nombreProducto"].ToString();
                 registro.estado = Convert.ToBoolean(fila["estado"]);
+                registro.cliente.correo = fila["correoCliente"].ToString();
+                lista.Add(registro);
+            }
+            return lista;
+        }
+        public static List<Cupon> ObtenerTodosRango()
+        {
+            List<Cupon> lista = new List<Cupon>();
+            DataSet ds = CuponDatos.SeleccionarXRango();
 
+            foreach (DataRow fila in ds.Tables[0].Rows)
+            {
+                Cupon registro = new Cupon();
+                registro.idCuponCliente = Convert.ToInt32(fila["idCupon"]);
+                registro.cliente.idCliente = Convert.ToInt32(fila["idCliente"]);
+                registro.cliente.nombre = fila["nombreCliente"].ToString();
+                registro.nombre = fila["nombreCupon"].ToString();
+                registro.producto.nombre = fila["nombreProducto"].ToString();
+              
                 lista.Add(registro);
             }
             return lista;
@@ -79,6 +103,14 @@ namespace FerreteriaLogica
         public static void InsertarCliente(Cupon cupon)
         {
             CuponDatos.InsertarCliente(cupon);
+        }
+        public static void ActualizarEstadoCupon(bool estado, int id)
+        {
+            CuponDatos.ActualizarCupon(estado, id);
+        }
+        public static void ActualizarEstadoCuponCliente(bool estado, int id)
+        {
+            CuponDatos.ActualizarCuponCliente(estado, id);
         }
     }
 }
