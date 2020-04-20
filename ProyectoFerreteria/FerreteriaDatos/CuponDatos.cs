@@ -27,9 +27,11 @@ namespace FerreteriaDatos
             comando.Parameters.AddWithValue("@idCupon", cupon.idCupon);
             comando.Parameters.AddWithValue("@nombre", cupon.nombre);
             comando.Parameters.AddWithValue("@descripcion", cupon.descripcion);
+            comando.Parameters.AddWithValue("@descuento", cupon.descuento);
             comando.Parameters.AddWithValue("@cantidad", cupon.cantidad);
             comando.Parameters.AddWithValue("@producto", cupon.producto.idProducto);
             comando.Parameters.AddWithValue("@rango", cupon.rango.idRango);
+            comando.Parameters.AddWithValue("@estado", cupon.estado);
 
             db.ExecuteNonQuery(comando);
         }
@@ -55,6 +57,17 @@ namespace FerreteriaDatos
 
             db.ExecuteNonQuery(comando);
         }
+        public static void ActualizarCanjeCupon(bool canje, int id)
+        {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_ActualizarCanjeCupon");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@idCupon", id);
+            comando.Parameters.AddWithValue("@canje",canje);
+
+
+            db.ExecuteNonQuery(comando);
+        }
         public static void InsertarCliente(Cupon cupon)
         {
             Database db = DatabaseFactory.CreateDatabase("Default");
@@ -63,6 +76,7 @@ namespace FerreteriaDatos
             comando.Parameters.AddWithValue("@idCupon", cupon.idCupon);
             comando.Parameters.AddWithValue("@idCliente",cupon.cliente.idCliente);
             comando.Parameters.AddWithValue("@estado", cupon.estado);
+            comando.Parameters.AddWithValue("@canje", cupon.canjeado);
             db.ExecuteNonQuery(comando);
         }
         public static DataSet SeleccionarXCliente()

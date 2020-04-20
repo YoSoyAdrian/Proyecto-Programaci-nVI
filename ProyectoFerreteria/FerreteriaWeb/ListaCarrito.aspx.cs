@@ -80,14 +80,20 @@ namespace FerreteriaWeb
             lista = new List<DetallePedido>();
             decimal subTotal = 0;
             decimal total = 0;
+            decimal descuento = 0;
+            if (txtDescuento.Text != "")
+            {
+                descuento = Convert.ToDecimal(txtDescuento.Text);
+            }
             foreach (DetallePedido detalle in ObtenerPedido())
             {
                 subTotal += detalle.subTotal;
                 total += detalle.subTotal;
             }
 
-            txtSubTotal.Text = subTotal.ToString();
-            txtTotal.Text = total.ToString();
+            txtSubTotal.Text = subTotal.ToString("N2");
+
+            txtTotal.Text = (total - descuento).ToString("N2");
 
 
         }
@@ -126,7 +132,11 @@ namespace FerreteriaWeb
                     pedido.codigo = codigo;
                     pedido.cantidad = detalle.cantidad;
                     pedido.total = detalle.subTotal;
-
+                    if (ChkCupon.Checked && ddlCupon.SelectedIndex > 0)
+                    {
+                        pedido.cupon = Convert.ToInt32(ddlCupon.SelectedValue);
+                    }
+                    
                     pedido.cliente = ClienteLN.Obtener(user.idCliente);
                     PedidoLN.Nuevo(pedido);
 
@@ -134,6 +144,10 @@ namespace FerreteriaWeb
                 decimal total = PedidoLN.ObtenerTotalXCliente(user.idCliente);
                 Rango rango = RangoLN.ObtenerXRango(total);
                 ClienteLN.Actualizar(user.idCliente, rango.idRango);
+                if (ChkCupon.Checked && ddlCupon.SelectedIndex > 0)
+                {
+                    CuponLN.ActualizarCanje(true, Convert.ToInt32(ddlCupon.SelectedValue));
+                }
 
                 codigo = 0;
                 carrito.Clear();
@@ -220,22 +234,41 @@ namespace FerreteriaWeb
             if (ChkCupon.Checked)
             {
                 lblCupon.Visible = true;
-                txtCupon.Visible = true;
-                btnCanjear.Visible = true;
+                ddlCupon.Visible = true;
+                if (Session["Cliente"] != null)
+                {
+                    int id = ((Cliente)Session["Cliente"]).idCliente;
+                    Cliente usuario = ClienteLN.Obtener(id);
+
+                    ddlCupon.DataSource = CuponLN.ObtenerClientes(usuario.idCliente);
+                    ddlCupon.DataBind();
+                    ListItem lst = new ListItem("Seleccione un cupón", "0");
+                    ddlCupon.Items.Insert(0, lst);
+                }
             }
             else
             {
-                lblCupon.Visible = false;
-                txtCupon.Visible = false;
-                btnCanjear.Visible = false;
+                if (!ChkCupon.Checked)
+                {
+                    lblCupon.Visible = false;
+                    ddlCupon.Visible = false;
+                    txtDescuento.Text = "";
+                    Total();
+                }
             }
         }
 
-        protected void btnCanjear_Click(object sender, EventArgs e)
+        protected void ddlCupon_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtCupon.Text != "")
+            if (ddlCupon.SelectedIndex > 0)
             {
-                int idCupon = Convert.ToInt32(txtCupon.Text);
+                Cliente user = (Cliente)Session["Cliente"];
+                int idCupon = Convert.ToInt32(ddlCupon.SelectedValue);
+                Cupon cupon = CuponLN.ObtenerXCliente(idCupon, user.idCliente);
+
+                txtDescuento.Text = cupon.descuento.ToString("N2");
+                Total();
+
 
             }
         }

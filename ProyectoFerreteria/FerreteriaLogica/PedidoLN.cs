@@ -37,6 +37,8 @@ namespace FerreteriaLogica
             foreach (DataRow fila in ds.Tables[0].Rows)
             {
                 Pedido registro = new Pedido();
+                registro.nombreCupon = fila["nombreCupon"].ToString();
+                registro.cupon = Convert.ToInt32(fila["cantidadCupon"]);
                 registro.total = Convert.ToInt32(fila["codigo"]);
                 registro.cliente.idCliente = Convert.ToInt32(fila["idCliente"]);
                 registro.cantidad = Convert.ToInt32(fila["cantidad"]);

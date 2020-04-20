@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FerreteriaEntidad;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,10 +9,27 @@ using System.Threading.Tasks;
 
 namespace FerreteriaDatos
 {
-   public class ClienteDatos
+    public class ClienteDatos
     {
-        public static void ActualizarRangoCliente( int idCliente,int idRango)
+        public static void InsertarRegistro(Cliente cliente)
         {
+            Database db = DatabaseFactory.CreateDatabase("Default");
+            SqlCommand comando = new SqlCommand("PA_InsertarCliente");
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.AddWithValue("@nombre",cliente.nombre);
+            comando.Parameters.AddWithValue("@apellidoP", cliente.apellidoP);
+            comando.Parameters.AddWithValue("@identificacion", cliente.identificacion);
+            comando.Parameters.AddWithValue("@direccion", cliente.direccion);
+            comando.Parameters.AddWithValue("@telefono", cliente.telefono);
+            comando.Parameters.AddWithValue("@correo", cliente.correo);
+            comando.Parameters.AddWithValue("@contrasenna", cliente.contrasenna);
+            comando.Parameters.AddWithValue("@rango", cliente.rango.idRango);
+
+            db.ExecuteNonQuery(comando);
+        }
+        public static void ActualizarRangoCliente(int idCliente, int idRango)
+        {
+
             Database db = DatabaseFactory.CreateDatabase("Default");
             SqlCommand comando = new SqlCommand("PA_ActualizarRangoCliente");
             comando.CommandType = CommandType.StoredProcedure;

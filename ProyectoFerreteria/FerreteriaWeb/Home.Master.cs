@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+
 using System.Web.UI.WebControls;
 
 namespace FerreteriaWeb
@@ -19,12 +20,30 @@ namespace FerreteriaWeb
                 Cliente usuario = ClienteLN.Obtener(id);
                 Rango rango = RangoLN.Obtener(usuario.rango.idRango);
 
+                lblCupon.Visible = true;
                 lblCliente.Text = usuario.nombre;
                 LkBtnIniciar.Text = "Cerrar sesión";
-                LkBtnRegistrar.Text = "Cambiar contraseña";
+                LkBtnRegistrar.Visible = false;
+                LinkCambiar.Visible = true;
+                lblCompra.Text = "Compra";
+                lnkRegistroInfo.HRef = "RegistroCompra.aspx";
                 lblRango.Text = rango.nombre;
                 consultarImagen(rango.idRango);
 
+            }
+            else
+            {
+                if (Session["Admin"] != null)
+                {
+                    LkBtnCerrar.Visible = true;
+
+                    lblCliente.Text = Session["Admin"].ToString();
+                    LkBtnIniciar.Text = "Registro Cupones";
+                    LkBtnRegistrar.Text = "Registro de Usuarios";
+                    LkBtnCerrar.Text = "Cerrar Sesión";
+                    LinkCambiar.Visible = false;
+
+                }
             }
 
         }
@@ -52,6 +71,10 @@ namespace FerreteriaWeb
 
         protected void LkBtnIniciar_Click(object sender, EventArgs e)
         {
+            if (Session["Admin"] != null)
+            {
+                Response.Redirect("CuponCliente.aspx");
+            }
             if (LkBtnIniciar.Text == "Cerrar sesión")
             {
                 Session.RemoveAll();
@@ -65,13 +88,13 @@ namespace FerreteriaWeb
 
         }
 
-        protected void LkBtnContra_Click(object sender, EventArgs e)
-        {
-
-        }
 
         protected void LkBtnRegistrar_Click(object sender, EventArgs e)
         {
+            if (Session["Admin"] != null)
+            {
+                Response.Redirect("MantCliente.aspx");
+            }
             if (LkBtnIniciar.Text == "Cerrar sesión")
             {
                 Session.RemoveAll();
@@ -80,8 +103,19 @@ namespace FerreteriaWeb
             else
             {
                 LkBtnIniciar.Text = "Iniciar Sesión";
+                Response.Redirect("Registrarse.aspx");
+            }
+        }
+
+        protected void LinkCerrar_Click(object sender, EventArgs e)
+        {
+            if (LkBtnCerrar.Text == "Cerrar sesión" || Session["Admin"] != null)
+            {
+                Session.RemoveAll();
                 Response.Redirect("InicioSesion.aspx");
             }
         }
+
+
     }
 }

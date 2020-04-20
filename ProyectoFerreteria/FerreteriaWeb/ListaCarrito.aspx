@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ListaCarrito.aspx.cs" Inherits="FerreteriaWeb.ListaCarrito" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+    <div class="row container-md">
         <div class="col-xl-5 text-center ">
             <h2>Carrito de compras</h2>
         </div>
@@ -62,19 +65,26 @@
                     <asp:Label ID="lblTotalCompra" runat="server" Text="Total a pagar: "></asp:Label>
                     <asp:TextBox ID="txtTotal" AutoPostBack="true" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                 </div>
+
                 <div class="form-group">
                     <asp:Button ID="btnComprar" runat="server" OnClick="btnRegistrar_Click" CssClass="btn btn-primary" Text="Comprar" />
                     <asp:CheckBox ID="ChkCupon" runat="server" OnCheckedChanged="ChkCupon_CheckedChanged" AutoPostBack="true" CssClass="form-check-input ml-5" Text="Cupón de Descuento" />
                 </div>
+
                 <div class="form-group">
-                    <asp:Label ID="lblCupon" Visible="false" runat="server"  Text="Digite el código del Cupón: "></asp:Label>
-                    <asp:TextBox ID="txtCupon" Visible="false" AutoPostBack="true" TextMode="Number" CssClass="form-control-md" runat="server" ></asp:TextBox>
-                <asp:Button ID="btnCanjear" Visible="false" runat="server" OnClick="btnCanjear_Click" CssClass="btn btn-secondary" Text="Canjear" />
+                    <asp:Label ID="lblCupon" Visible="false" runat="server" Text="Cupón de descuento"></asp:Label>
+
                 </div>
+                <div>
+                    <asp:DropDownList ID="ddlCupon" runat="server" Visible="false" DataValueField="idCuponCliente" DataTextField="nombre" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlCupon_SelectedIndexChanged"></asp:DropDownList>
+                </div>
+
             </div>
-
         </div>
-
     </div>
+
+    <script src="Scripts/mensaje.js"></script>
+    <script src="Scripts/sweetalert2.min.js"></script>
+
 </asp:Content>
 

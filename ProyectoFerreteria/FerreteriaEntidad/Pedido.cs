@@ -14,10 +14,13 @@ namespace FerreteriaEntidad
         public int cantidad { get; set; }
         public decimal total { get; set; }
         public int codigo { get; set; }
+        public int cupon { get; set; }
+        public string nombreCupon { get; set; }
         public Pedido()
         {
             this.cliente = new Cliente();
             this.producto = new Producto();
+          
         }
     }
 }

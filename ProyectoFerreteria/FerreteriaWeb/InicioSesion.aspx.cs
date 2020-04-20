@@ -18,39 +18,55 @@ namespace FerreteriaWeb
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Cliente user = new Cliente(txtUsuario.Text, txtPassword.Text);
-
-
-            Cliente userVerificado;
-            userVerificado = ClienteLN.verificarCredenciales(user);
-            if (userVerificado != null)
+            if (txtPassword.Text.Equals("123456") && txtUsuario.Text.Equals("admin@prueba.com"))
             {
-                Session["Cliente"] = (Cliente)userVerificado;
-                decimal total = PedidoLN.ObtenerTotalXCliente(userVerificado.idCliente);
-                if (total != 0)
+                Session["Admin"] = "Admin";
+                ClientScript.RegisterStartupScript(this.GetType(), "Inicio de Sesión",
+       "mensajeRedirect('Inicio de Sesión','Credenciales correctas','success','PaginaPrincipal.aspx')", true);
+            
+        }
+            else
+            {
+
+                Cliente user = new Cliente(txtUsuario.Text, txtPassword.Text);
+
+
+                Cliente userVerificado;
+                userVerificado = ClienteLN.verificarCredenciales(user);
+                if (userVerificado != null)
                 {
-                    Rango rango = RangoLN.ObtenerXRango(total);
-                    ClienteLN.Actualizar(userVerificado.idCliente, rango.idRango);
+                    Session["Cliente"] = (Cliente)userVerificado;
+                    decimal total = PedidoLN.ObtenerTotalXCliente(userVerificado.idCliente);
+                    if (total != 0)
+                    {
+                        Rango rango = RangoLN.ObtenerXRango(total);
+                        ClienteLN.Actualizar(userVerificado.idCliente, rango.idRango);
+                    }
+                    else
+                    {
+                        ClienteLN.Actualizar(userVerificado.idCliente, 5);
+                    }
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Inicio de Sesión",
+         "mensajeRedirect('Inicio de Sesión','Credenciales correctas','success','PaginaPrincipal.aspx')", true);
                 }
                 else
                 {
-                    ClienteLN.Actualizar(userVerificado.idCliente, 5);
+                    ClientScript.RegisterStartupScript(
+                      this.GetType(),
+                      "Inicio de Sesión",
+                       "mensajeRedirect('Inicio de Sesión','Verifique las credenciales','error','InicioSesion.aspx')",
+                      true
+                      );
+                    lblValidacion.Text = "Correo Electronico o Contraseña incorrecto";
+                    txtPassword.Text = "";
                 }
+            }
+            }
 
-                ClientScript.RegisterStartupScript(this.GetType(), "Inicio de Sesión",
-     "mensajeRedirect('Inicio de Sesión','Credenciales correctas','success','PaginaPrincipal.aspx')", true);
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(
-                  this.GetType(),
-                  "Inicio de Sesión",
-                   "mensajeRedirect('Inicio de Sesión','Verifique las credenciales','error','InicioSesion.aspx')",
-                  true
-                  );
-                lblValidacion.Text = "Correo Electronico o Contraseña incorrecto";
-                txtPassword.Text = "";
-            }
+        protected void lkBtnCrearCuenta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registrarse.aspx");
         }
     }
-}
+    }

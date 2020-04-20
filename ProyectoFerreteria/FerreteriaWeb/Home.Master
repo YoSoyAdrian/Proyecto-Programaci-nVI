@@ -11,9 +11,8 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/estilo.css" rel="stylesheet" />
-     <link href="Content/sweetalert2.min.css" rel="stylesheet" />
-
-
+    <link href="Content/sweetalert2.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
     <style>
         .row {
@@ -28,10 +27,10 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <%-- Menú de Navegación --%>
-        <div class="row mr-0" >
+        <div class="row mr-0">
             <div class="col-xl-12 p-0">
                 <nav class="navbar navbar-expand-xl bg-dark navbar-dark">
-                    <a class="navbar-brand col-xl-3 col-sm-6" href="PaginaPrincipal.aspx">
+                    <a class="navbar-brand col-xl-3 col-sm-6 align-self-baseline " href="PaginaPrincipal.aspx">
                         <asp:Image ID="Image1" ImageUrl="~/Img/logo.png" runat="server" />
                         <asp:Label CssClass="text-light " ID="Label1" runat="server" Text="Ferretería Digital">
                         </asp:Label></a>
@@ -41,28 +40,28 @@
                     </button>
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul class="navbar-nav">
-                            <li class="nav-item col-xl-3">
-                                <a class="nav-link m-3" href="RegistroCompra.aspx">
+                            <li class="nav-item col-xl-4">
+                                <a class="nav-link mt-3" id="lnkRegistroInfo" runat="server" href="Informacion.aspx">
                                     <div class="col-xl-12">
-                                        <asp:Label ID="lblCompra" runat="server" Text="Compras"></asp:Label>
+                                        <asp:Label ID="lblCompra" runat="server" Text="Tu nivel"></asp:Label>
                                     </div>
                                 </a>
                             </li>
-                            <li class="nav-item col-xl-3">
-                                <a class="nav-link m-3" href="Cupon.aspx">
+                            <li class="nav-item col-xl-4">
+                                <a class="nav-link mt-3" href="Cupon.aspx">
                                     <div class="col-xl-12">
-                                        <asp:Label ID="Label2" runat="server" Text="Cupones"></asp:Label>
+                                        <asp:Label ID="lblCupon" Visible="false" runat="server" Text="Cupones"></asp:Label>
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item col-xl-3 text-center">
-                                <a class="nav-link">
+                                <a class="nav-link" onclick="info();return false">
 
                                     <div class="col-xl-12">
                                         <asp:Image ID="imgRango" runat="server" ImageUrl="~/Img/cupon.png" />
                                     </div>
                                     <div class="col-xl-12">
-                                        <asp:Label ID="lblRango" CssClass="text-white" runat="server" Text="Nivel"></asp:Label>
+                                        <asp:Label ID="lblRango" CssClass="text-white" runat="server"  Text="Nivel"></asp:Label>
                                     </div>
 
                                 </a>
@@ -75,7 +74,7 @@
                                     <div class="col-xl-12">
                                         <asp:Label ID="lblCliente" CssClass="text-white" runat="server" Text="Mi cuenta"></asp:Label>
                                     </div>
-
+                                   
                                 </a>
                                 <div class="dropdown-menu text-center">
                                     <a class="dropdown-item-text">
@@ -83,6 +82,14 @@
                                     </a>
                                     <a class="dropdown-item-text text-center">
                                         <asp:LinkButton ID="LkBtnRegistrar" CssClass="btn btn-block" OnClick="LkBtnRegistrar_Click" runat="server" Text="Registrarse"></asp:LinkButton>
+                                    </a>
+
+                                    <a class="dropdown-item-text text-center">
+                                        <asp:LinkButton ID="LinkCambiar" ViewStateMode="Disabled" Visible="false" CssClass="btn btn-block" runat="server" OnClientClick="contrasenna();return false" Text="Cambiar contraseña"></asp:LinkButton>
+                                    </a>
+
+                                    <a class="dropdown-item-text text-center">
+                                        <asp:LinkButton ID="LkBtnCerrar" ViewStateMode="Disabled" Visible="false" CssClass="btn btn-block" OnClick="LinkCerrar_Click" runat="server" Text="Cerrar sesión"></asp:LinkButton>
                                     </a>
                                 </div>
                             </li>
@@ -95,6 +102,7 @@
                                         <asp:Label ID="lblCantidad" CssClass="text-white" runat="server" Text="Carrito"></asp:Label>
                                     </div>
                                 </a>
+                                
                             </li>
                         </ul>
                     </div>
@@ -110,54 +118,7 @@
         </div>
 
     </form>
-    <form id="form2" name="form2" method="get">
-        <div class="container mt-3">
-            <!-- The Modal -->
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
 
-                        <!-- Modal Header -->
-                        <div class="modal-header bg-info">
-
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Correo:</label>
-                            </div>
-                            <div class="input-group form-group">
-                                <input type="text" class="form-control" placeholder="Escriba su correo electronico" id="email" name="email" required="required" />
-                                <div class="input-group-append">
-                                    <span class="input-group-text">@example.com</span>
-                                </div>
-                            </div>
-                            <div class="formulario">
-                                <label>Contraseña:</label>
-                                <input type="password" class="form-control" id="password" name="password" required="required" />
-                            </div>
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer ">
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-success" onclick="check()" id="btnEntrar" name="btnEntrar">Entrar</button>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </form>
 
     <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/jquery-3.4.1.js")%>'></script>
     <script type="text/javascript" src='<%=ResolveClientUrl("~/Scripts/bootstrap.min.js")%>'></script>

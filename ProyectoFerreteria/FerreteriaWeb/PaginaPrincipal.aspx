@@ -66,9 +66,9 @@
                                 </div>
                             </div>
                             <div class="card__img form-group container-sm"></div>
-                            <div class="card_link form-group ">
-                                <div class="card__img--hover form-group col-md-12 col-sm-12 col-xl-12 text-center">
-                                    <asp:Image ID="Image1" runat="server" CssClass="container-xl container-fluid " ImageUrl='<%# "data:image/png;base64," + Convert.ToBase64String((byte[])Eval("imagen"))  %>' />
+                            <div class="card_link  form-group ">
+                                <div class="card__img--hover  form-group col-md-12 col-sm-12 col-xl-12">
+                                    <asp:Image ID="Image1" runat="server" CssClass="swal2-image " ImageUrl='<%# "data:image/png;base64," + Convert.ToBase64String((byte[])Eval("imagen"))  %>' />
                                 </div>
                             </div>
 

@@ -127,7 +127,8 @@
     <Content Include="Cupon.aspx" />
     <Content Include="MantProducto.aspx" />
     <Content Include="PaginaPrincipal.aspx" />
-    <Content Include="RegistrarCupon.aspx" />
+    <Content Include="Informacion.aspx" />
+    <Content Include="Registrarse.aspx" />
     <Content Include="RegistroCompra.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -307,12 +308,19 @@
       <DependentUpon>PaginaPrincipal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrarCupon.aspx.cs">
-      <DependentUpon>RegistrarCupon.aspx</DependentUpon>
+    <Compile Include="Informacion.aspx.cs">
+      <DependentUpon>Informacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RegistrarCupon.aspx.designer.cs">
-      <DependentUpon>RegistrarCupon.aspx</DependentUpon>
+    <Compile Include="Informacion.aspx.designer.cs">
+      <DependentUpon>Informacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registrarse.aspx.cs">
+      <DependentUpon>Registrarse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registrarse.aspx.designer.cs">
+      <DependentUpon>Registrarse.aspx</DependentUpon>
     </Compile>
     <Compile Include="RegistroCompra.aspx.cs">
       <DependentUpon>RegistroCompra.aspx</DependentUpon>

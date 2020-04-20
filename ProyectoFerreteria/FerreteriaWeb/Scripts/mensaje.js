@@ -19,8 +19,7 @@ mensaje = function (titulo, texto, tipo) {
         allowEscapeKey: true,
         allowOutsideClick: false
     });
-}
-
+};
 mensajeConfirm = function (titulo) {
     const Toast = Swal.mixin({
         toast: true,
@@ -38,4 +37,62 @@ mensajeConfirm = function (titulo) {
         icon: 'success',
         title: `${titulo}`
     })
+};
+
+function contrasenna() {
+
+    (async () => {
+
+        //const { value: password } = await Swal.fire({
+        //    title: 'Nueva contraseña',
+        //    input: 'password',
+        //    ,
+        //    inputAttributes: {
+        //        maxlength: 10,
+        //        autocapitalize: 'off',
+        //        autocorrect: 'off'
+        //    }
+        //})
+        const { value: password } = await Swal.fire({
+            title: 'Escriba la nueva contraseña',
+            html:
+                '<form id="form1">' +
+                '<div class="row">' +
+                '<div class="col-md-12">' +
+                '</div>' +
+                '<div class="input-group col-md-8">' +
+                '<input ID="txtPassword" type="Password" Class="form-control">' +
+                '</div>' +
+                '<div class=" col-md-2">' +
+                '<span onclick="mostrarContrasena()" class="material-icons btn">visibility</span>' +
+                '</div>' +
+                '</form>',
+
+            focusConfirm: false,
+            preConfirm: () => {
+                return [
+                    document.getElementById('password').value
+
+                ]
+            }
+        })
+
+    })()
+};
+
+function mostrarContrasena() {
+    var tipo = document.getElementById("txtPassword");
+    if (tipo.type == "password") {
+        tipo.type = "text";
+    } else {
+        tipo.type = "password";
+    }
+}
+function info() {
+    Swal.fire(
+        'Sabías que?',
+        'Al registrarte obtienes un rango que mejora con la cantidad de compras que realices',
+        'question',
+        
+    )
 };

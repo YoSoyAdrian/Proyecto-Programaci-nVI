@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <script src="Scripts/sweetalert2.min.js"></script>
-    <script src="Scripts/mensaje.js"></script>
+   
     <link href="Content/sweetalert2.min.css" rel="stylesheet" />
     <style>
         html {
@@ -41,7 +40,7 @@
             </div>
             <section class="form-group text-left">
 
-                <asp:CheckBox ID="ChkMostrar" CssClass="form-check" runat="server" onclick="mostrarContra()" TextAlign="Right" Text="Mostrar Contraseña" ForeColor="White" Font-Size="Small" Font-Bold="true" />
+                <asp:CheckBox ID="ChkMostrar" CssClass="form-check" runat="server" onclick="mostrarContrasena()" TextAlign="Right" Text="Mostrar Contraseña" ForeColor="White" Font-Size="Small" Font-Bold="true" />
 
             </section>
             <div class="form-group">
@@ -53,8 +52,10 @@
 
             </div>
             <div class="form-group">
-                <asp:LinkButton ID="lkBtnCrearCuenta" Text="Crear Cuenta" runat="server" ></asp:LinkButton>
+                <asp:LinkButton ID="lkBtnCrearCuenta" Text="Crear Cuenta" runat="server" OnClick="lkBtnCrearCuenta_Click" ></asp:LinkButton>
             </div>
         </div>
     </div>
+     <script src="Scripts/sweetalert2.min.js"></script>
+    <script src="Scripts/mensaje.js"></script>
 </asp:Content>

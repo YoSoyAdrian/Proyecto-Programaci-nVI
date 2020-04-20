@@ -30,6 +30,8 @@ namespace FerreteriaDatos
             comando.Parameters.AddWithValue("@cantidad", pedido.cantidad);
             comando.Parameters.AddWithValue("@total", pedido.total);
             comando.Parameters.AddWithValue("@codigo", pedido.codigo);
+            comando.Parameters.AddWithValue("@cupon", pedido.cupon);
+
 
             db.ExecuteNonQuery(comando);
         }

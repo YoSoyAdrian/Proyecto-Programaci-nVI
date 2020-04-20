@@ -51,6 +51,15 @@ namespace FerreteriaWeb
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
+        /// Control lnkRegistroInfo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkRegistroInfo;
+
+        /// <summary>
         /// Control lblCompra.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,13 @@ namespace FerreteriaWeb
         protected global::System.Web.UI.WebControls.Label lblCompra;
 
         /// <summary>
-        /// Control Label2.
+        /// Control lblCupon.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblCupon;
 
         /// <summary>
         /// Control imgRango.
@@ -121,6 +130,24 @@ namespace FerreteriaWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LkBtnRegistrar;
+
+        /// <summary>
+        /// Control LinkCambiar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkCambiar;
+
+        /// <summary>
+        /// Control LkBtnCerrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LkBtnCerrar;
 
         /// <summary>
         /// Control lblCantidad.

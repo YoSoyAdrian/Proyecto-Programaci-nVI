@@ -15,7 +15,7 @@ namespace FerreteriaWeb
           {
             if (!IsPostBack)
             {
-                ddlRango.DataSource = RangoLN.ObtenerTodos();
+                ddlRango.DataSource = RangoLN.ObtenerTodos().Where(x=>x.idRango!=5);
                 ddlRango.DataBind();
                 grvListadoCupon.DataSource = CuponLN.ObtenerTodos();
                 grvListadoCupon.DataBind();
@@ -43,8 +43,9 @@ namespace FerreteriaWeb
                 Cliente usuario = ClienteLN.Obtener(id);
               
 
-                grvListadoCupon.DataSource = CuponLN.ObtenerClientes(usuario.idCliente);
+                grvListadoCupon.DataSource = CuponLN.ObtenerClientes(usuario.idCliente).Where(x=>x.estado==true);
                 grvListadoCupon.DataBind();
+
             }
             else
             {

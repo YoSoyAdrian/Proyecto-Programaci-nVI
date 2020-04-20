@@ -11,12 +11,19 @@ namespace FerreteriaEntidad
         public int idCuponCliente { get; set; }
         public int idCupon { get; set; }
         public string nombre { get; set; }
+        public decimal descuento { get; set; }
         public string descripcion { get; set; }
         public Producto producto { get; set; }
         public Cliente cliente { get; set; }
         public Rango rango { get; set; }
         public int cantidad { get; set; }
         public bool estado { get; set; }
+        public bool canjeado { get; set; }
+        public override string ToString()
+        {
+            return "Código " + idCuponCliente + " " + nombre;
+        }
+
         public Cupon()
         {
             this.producto = new Producto();
